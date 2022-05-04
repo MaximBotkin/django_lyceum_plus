@@ -4,11 +4,6 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser, Profile
 
 
-class ProfileInlined(admin.StackedInline):
-    model = Profile
-    can_delete = False
-
-
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
@@ -26,7 +21,7 @@ class CustomUserAdmin(UserAdmin):
     )
     search_fields = ('email',)
     ordering = ('email',)
-    inlines = (ProfileInlined,)
+    # inlines = (ProfileInlined,)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
