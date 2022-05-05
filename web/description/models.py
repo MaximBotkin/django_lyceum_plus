@@ -9,7 +9,11 @@ User = get_user_model()
 
 class AbstractRating(models.Model):
     RELATED_NAME = "rating"
-    CHOICES = ((1, "Лайк"), (0, "Нейтрально"), (-1, "Дизлайк"))
+    CHOICES = (
+        (1, "Лайк"),
+        (0, "Нейтрально"),
+        (-1, "Дизлайк"),
+    )
     star = models.IntegerField("Оценка", choices=CHOICES, default=CHOICES[1][0])
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name=RELATED_NAME)
 
