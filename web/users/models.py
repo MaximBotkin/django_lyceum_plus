@@ -26,6 +26,11 @@ class Profile(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
+    avatar = models.ImageField(
+        'Аватарка',
+        upload_to='uploads/',
+        null=True
+    )
     username = models.CharField(
         'Никнэйм',
         max_length=50,
@@ -39,6 +44,10 @@ class Profile(models.Model):
     last_name = models.CharField(
         'Фамилия',
         max_length=50,
+        null=True
+    )
+    mobile = models.PositiveIntegerField(
+        'Номер телефона',
         null=True
     )
     description = models.TextField(
