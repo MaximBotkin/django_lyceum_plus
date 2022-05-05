@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_extensions',
     'users',
+    'description',
+    'posts',
     'debug_toolbar',
 ]
 

@@ -2,5 +2,6 @@ from django.apps import AppConfig
 
 
 class DescriptionConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'description'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "description"
+    verbose_name = "Описание"
