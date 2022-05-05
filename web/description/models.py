@@ -2,6 +2,7 @@ from this import d
 from django.db import models
 from django.contrib.auth import get_user_model
 from posts.models import Post
+from description.validators import RegexValidator
 
 
 User = get_user_model()
@@ -45,6 +46,12 @@ class Tag(models.Model):
 
 class Category(models.Model):
     name = models.CharField("Название", max_length=50, unique=True)
+    color = models.CharField(
+        "Цвет",
+        default="#FFF",
+        max_length=9,
+        validators=[RegexValidator("#([a-zA-Z0-9]{8}|[a-zA-Z0-9]{6}|[a-zA-Z0-9]{3})")],
+    )
 
     class Meta:
         verbose_name = "Категория"
