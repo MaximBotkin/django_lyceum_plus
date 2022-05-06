@@ -12,7 +12,7 @@ class Post(models.Model):
     title = models.TextField(max_length=64, default='title', verbose_name='Заголовок')
     text = models.TextField(max_length=200, default='text', verbose_name='Текст')
     tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категории')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категории', null=True)
 
     def __str__(self):
         return self.title
