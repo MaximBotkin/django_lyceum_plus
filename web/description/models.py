@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from posts.models import Post
+# from posts.models import Post
 from description.validators import RegexValidator
 
 
@@ -24,7 +24,7 @@ class AbstractRating(models.Model):
 
 class PostRating(AbstractRating):
     post = models.ForeignKey(
-        Post, on_delete=models.CASCADE, related_name=AbstractRating.RELATED_NAME
+        'posts.Post', on_delete=models.CASCADE, related_name=AbstractRating.RELATED_NAME
     )
 
     class Meta:
