@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+{% block content_before_form %}{% endblock content_before_form %}
+    <form method="post">{% csrf_token %}
+        <div>
+        {% if form.errors %}
+            <p class="errornote">
+                {% if form.errors.items|length == 1 %}
+                    Пожалуйста, исправьте ошибку ниже
+                {% else %}
+                    Пожалуйста, исправьте ошибки ниже{% endif %}
+            </p>
+        {% endif %}
+        <fieldset>
+            {% block fields %}{% endblock fields %}
+        </fieldset>
+            <div class="submit-row">
+                <input type="submit" class="btn btn-primary btn-sm" value="{% block submit %}Submit{% endblock submit %}">
+            </div>
+        </div>
+    </form>
+    {% block content_after_form %}{% endblock content_after_form %}
+{% endblock %}

@@ -1,7 +1,19 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from users.urls import urlpatterns as user_urls
+from users.auth_urls import urlpatterns as auth_urls
+from web import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('users/', include(user_urls)),
+    path('auth/', include(auth_urls))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns.append(path('__debug__/', include(debug_toolbar.urls)))

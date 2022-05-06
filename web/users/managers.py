@@ -22,3 +22,9 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Cуперпользователь обязан иметь поля is_staff и is_superuser.')
 
         return self.create_user(email, password, **extra_fields)
+
+    def get_all_active_users(self):
+        return self.filter(is_active=True)
+
+    def get_user_page(self, user_id):
+        return self.filter(pk=1)

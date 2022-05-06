@@ -1,0 +1,15 @@
+{% extends 'users/auth/standard_form.html' %}
+{% block title %}Регистрация{% endblock title %}
+{% block content_before_form %}
+<h3>Регистрация</h3>
+{% endblock content_before_form %}
+{% block fields %}
+    {% for field in form %}
+    <p>
+        {{ field.errors }}
+        {{ field.label }}
+        {{ field }}
+    </p>
+    {% endfor %}
+{% endblock fields %}
+{% block submit %}Зарегистрироваться{% endblock submit %}

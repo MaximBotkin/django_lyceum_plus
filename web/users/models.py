@@ -2,6 +2,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from .managers import CustomUserManager
+from sorl.thumbnail import get_thumbnail
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -32,6 +33,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         max_length=50,
         null=True
     )
+    birthday = models.DateField(
+        'Дата рождения',
+        null=True
+    )
     mobile = models.PositiveIntegerField(
         'Номер телефона',
         null=True
@@ -45,6 +50,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
+
+    def get_image_400x300(self):
+        return get_thumbnail(self.avatar, '400x300', crop='center', quality=60)
 
     class Meta:
         verbose_name = 'пользователь'

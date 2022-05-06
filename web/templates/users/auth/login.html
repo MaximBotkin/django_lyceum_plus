@@ -1,0 +1,15 @@
+{% extends 'users/auth/standard_form.html' %}
+{% block submit %}Войти{% endblock submit %}
+{% block fields %}
+  <div class="form-row">
+    {{ form.username.errors }}
+    {{ form.username.label_tag }} {{ form.username }}
+  </div>
+  <div class="form-row">
+    {{ form.password.errors }}
+    {{ form.password.label_tag }} {{ form.password }}
+  </div>
+  <div class="password-reset-link">
+    <a href="{% url 'password_reset' %}">Забыли логин или пароль?</a>
+</div>
+{% endblock fields %}
