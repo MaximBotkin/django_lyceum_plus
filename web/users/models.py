@@ -54,13 +54,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def get_image_400x300(self):
         return get_thumbnail(self.avatar, '400x300', crop='center', quality=60)
-    
+
     def get_full_name(self):
         return f'{str(self.first_name).capitalize()} {str(self.last_name).capitalize()}'
-    
+
     def get_absolute_url(self):
         return reverse("users:user_detail", kwargs={"user_id": self.pk})
-    
 
     class Meta:
         verbose_name = 'пользователь'

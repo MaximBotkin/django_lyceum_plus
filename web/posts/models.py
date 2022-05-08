@@ -21,13 +21,13 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Публикация'
         verbose_name_plural = 'Публикации'
-    
+
     objects = PostManager()
 
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор', null=True)
-    
+
     class Meta:
         verbose_name = 'Комментрий'
         verbose_name_plural = 'Комментрии'
