@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for post in posts %}
+        <div class="card">
+            <div class="card-header" style="background-color: {{ post.category.color }}">
+                <h4>{{ post.category }}</h4>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.text }}</p>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    {% for tag in post.tags.all %}
+                        #{{ tag }}
+                    {% endfor %}
+                </h6>
+                <footer class="blockquote-footer">{{ post.user.username }}</footer>
+            </div>
+            <div class="card-footer text-muted">
+                {{ post.creation_date }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

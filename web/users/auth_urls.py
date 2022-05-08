@@ -13,7 +13,9 @@ from django.contrib.auth.views import (
 
 urlpatterns = [
     path("admin/login/", LoginView.as_view(template_name="users/auth/login.html")),
-    path("login/", LoginView.as_view(template_name="users/auth/login.html")),
+    path(
+        "login/", LoginView.as_view(template_name="users/auth/login.html"), name="login"
+    ),
     path("logout/", LogoutView.as_view(template_name="users/auth/logout.html")),
     path(
         "password_change/",
@@ -21,16 +23,20 @@ urlpatterns = [
     ),
     path(
         "password_change/done/",
-        PasswordChangeDoneView.as_view(template_name="users/auth/password_change_done.html"),
+        PasswordChangeDoneView.as_view(
+            template_name="users/auth/password_change_done.html"
+        ),
     ),
     path(
         "password_reset/",
         PasswordResetView.as_view(template_name="users/auth/password_reset.html"),
-        name='password_reset'
+        name="password_reset",
     ),
     path(
         "password_reset/done/",
-        PasswordResetDoneView.as_view(template_name="users/auth/password_reset_done.html"),
+        PasswordResetDoneView.as_view(
+            template_name="users/auth/password_reset_done.html"
+        ),
     ),
     path(
         "reset/<uidb64>/<token>/",
@@ -44,5 +50,5 @@ urlpatterns = [
             template_name="users/auth/password_reset_complete.html"
         ),
     ),
-    path('signup/', views.SignupView.as_view(), name='sign_up'),
+    path("signup/", views.SignupView.as_view(), name="sign_up"),
 ]
