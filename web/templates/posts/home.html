@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}Главная{% endblock title %}
 {% block content %}
     {% for post in posts %}
         <div class="card">
@@ -13,7 +14,11 @@
                         #{{ tag }}
                     {% endfor %}
                 </h6>
-                <footer class="blockquote-footer">{{ post.user.username }}</footer>
+                <footer class="blockquote-footer">
+                    <a href="{{ post.author.get_absolute_url }}">
+                        {{ post.author.get_full_name }}
+                    </a>
+                </footer>
             </div>
             <div class="card-footer text-muted">
                 {{ post.creation_date }}
