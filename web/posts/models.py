@@ -1,11 +1,25 @@
-
 from django.db import models
 from django.contrib.auth import get_user_model
 from description.models import Category, Tag
 from posts.managers import PostManager
+from sorl.thumbnail import get_thumbnail
+from django.utils.safestring import mark_safe
 
 User = get_user_model()
 
+class PostImage(models.Model):
+    post = models.ForeignKey('Post', verbose_name='Товар', default=None, on_delete=models.CASCADE)
+    image = models.ImageField(verbose_name='Изображение', upload_to='uploads/')
+
+    def get_image_400x300(self):
+        return get_thumbnail(self.image, '400x300', crop='center', quality=60)
+
+    class Meta:
+        verbose_name = "Фотография, связанная с постом"
+        verbose_name_plural = "Фотографии, связанные с постом"
+
+    def __str__(self):
+        return self.post.title
 
 class Post(models.Model):
     title = models.CharField(max_length=64, default='title', verbose_name='Заголовок')
@@ -13,8 +27,21 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория', null=True)
     text = models.TextField(max_length=200, default='text', verbose_name='Текст')
     tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)
+    upload = models.ImageField('Главное изображение', upload_to='uploads/', null=True)
     creation_date = models.DateTimeField('Дата создания', auto_now=True, editable=False)
 
+    def get_image_300x300(self):
+        if self.upload:
+            return get_thumbnail(self.upload, '300x300', crop='center', quality=100)
+
+    def image_tmb(self):
+        if self.upload:
+            return mark_safe(f'<img src="{self.upload.url}" width="50">')
+        return 'Изображение отсутствует'
+
+    image_tmb.short_description = 'Превью'
+    image_tmb.allow_tags = True
+    
     def __str__(self):
         return self.title[:30]
 
@@ -23,7 +50,6 @@ class Post(models.Model):
         verbose_name_plural = 'Публикации'
 
     objects = PostManager()
-
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор', null=True)
