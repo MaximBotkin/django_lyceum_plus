@@ -5,7 +5,9 @@ from posts.managers import PostManager
 from sorl.thumbnail import get_thumbnail
 from django.utils.safestring import mark_safe
 
+
 User = get_user_model()
+
 
 class PostImage(models.Model):
     post = models.ForeignKey('Post', verbose_name='Товар', default=None, on_delete=models.CASCADE)
@@ -20,6 +22,7 @@ class PostImage(models.Model):
 
     def __str__(self):
         return self.post.title
+
 
 class Post(models.Model):
     title = models.CharField(max_length=64, default='title', verbose_name='Заголовок')
@@ -41,7 +44,7 @@ class Post(models.Model):
 
     image_tmb.short_description = 'Превью'
     image_tmb.allow_tags = True
-    
+
     def __str__(self):
         return self.title[:30]
 
@@ -50,6 +53,7 @@ class Post(models.Model):
         verbose_name_plural = 'Публикации'
 
     objects = PostManager()
+
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор', null=True)

@@ -14,6 +14,8 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+handler404 = 'web.views.page_not_found_view'
+handler500 = 'web.views.server_error'
 
 if settings.DEBUG:
     import debug_toolbar
