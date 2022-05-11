@@ -11,13 +11,20 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         'Почта',
         unique=True
     )
-    is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
+    is_staff = models.BooleanField(
+        default=False
+    )
+    is_active = models.BooleanField(
+        default=True
+    )
+    date_joined = models.DateTimeField(
+        default=timezone.now
+    )
     avatar = models.ImageField(
         'Аватарка',
         upload_to='uploads/',
-        null=True
+        null=True,
+        blank=True
     )
     username = models.CharField(
         'Никнэйм',
@@ -27,24 +34,29 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(
         'Имя',
         max_length=50,
-        null=True
+        null=True,
+        blank=True
     )
     last_name = models.CharField(
         'Фамилия',
         max_length=50,
-        null=True
+        null=True,
+        blank=True
     )
     birthday = models.DateField(
         'Дата рождения',
-        null=True
+        null=True,
+        blank=True
     )
     mobile = models.PositiveIntegerField(
         'Номер телефона',
-        null=True
+        null=True,
+        blank=True
     )
     description = models.TextField(
         'Описание',
-        null=True
+        null=True,
+        blank=True
     )
 
     USERNAME_FIELD = 'email'
