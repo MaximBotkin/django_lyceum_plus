@@ -22,7 +22,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         'Никнэйм',
         max_length=50,
-        default='user'
+        unique=True
     )
     first_name = models.CharField(
         'Имя',
@@ -64,3 +64,30 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
+
+
+class Subscription(models.Model):
+    person = models.ForeignKey(
+        'CustomUser',
+        verbose_name='Пользователь',
+        on_delete=models.CASCADE,
+        related_name='person_who_has_subscribers'
+    )
+    subscriber = models.ForeignKey(
+        'CustomUser',
+        verbose_name='Подписчик',
+        on_delete=models.CASCADE,
+        related_name='subscribers',
+    )
+    is_subscribed = models.BooleanField(
+        'Подписка активна',
+        default=True,
+    )
+
+    def __str__(self):
+        return f'{self.subscriber} подписался на {self.person}'
+
+    class Meta:
+        unique_together = ['person', 'subscriber']
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'

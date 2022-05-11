@@ -2,5 +2,7 @@
     {{ user }}
     {{ user.first_name }}
     {{ user.last_name }}
-    <img src="{{ user.get_image_400x300.url }}">
+    {% if user.avatar %}
+        <img src="{{ user.get_image_400x300.url }}">
+    {% endif %}
 {% endfor %}

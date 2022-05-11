@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Subscription
 
 
 class CustomUserAdmin(UserAdmin):
@@ -22,7 +22,13 @@ class CustomUserAdmin(UserAdmin):
     )
     search_fields = ('email',)
     ordering = ('email',)
-    # inlines = (ProfileInlined,)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)
+
+
+@admin.register(Subscription)
+class SubscriptionAdmin(admin.ModelAdmin):
+    list_display = ('person', 'subscriber', 'is_subscribed',)
+    list_editable = ('is_subscribed',)
+    list_display_links = ('person',)
