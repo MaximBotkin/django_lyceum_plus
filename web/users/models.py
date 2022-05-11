@@ -64,8 +64,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    def get_image_400x300(self):
-        return get_thumbnail(self.avatar, '400x300', crop='center', quality=60)
+    def get_image_400x400(self):
+        return get_thumbnail(self.avatar, '400x400', crop='center', quality=60)
 
     def get_full_name(self):
         return f'{str(self.first_name).capitalize()} {str(self.last_name).capitalize()}'

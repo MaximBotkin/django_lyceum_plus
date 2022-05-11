@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Ваш профиль:</h1>
+{% for field in form %}
+    <p>
+        {{ field.errors }}
+        {{ field.label }}
+        {{ field }}
+    </p>
+{% endfor %}
+{% endblock content %}

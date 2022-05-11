@@ -1,8 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
 {% for user in users %}
-    {{ user }}
-    {{ user.first_name }}
-    {{ user.last_name }}
-    {% if user.avatar %}
-        <img src="{{ user.get_image_400x300.url }}">
-    {% endif %}
+    <p>{{ user }}<p>
 {% endfor %}
+{% endblock content %}
