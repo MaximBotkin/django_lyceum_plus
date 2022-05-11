@@ -6,12 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Web project{% endblock title %}</title>
-    <link rel="stylesheet" href="{% static '1.css' %}">
     <link rel="stylesheet" href="{% static 'bootstrapmin.css' %}">
+    <link rel="stylesheet" href="{% static '1.css' %}">
 </head>
 <body>
     {% include 'header.html' %}
-    {% block content %}Контент забрали инопланетяне :({% endblock content %}
+    <main>
+        {% block content %}
+            Контент забрали инопланетяне :(
+        {% endblock content %}
+    </main>
     {% include 'footer.html' %}
 </body>
 </html>

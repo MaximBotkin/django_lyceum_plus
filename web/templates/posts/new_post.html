@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Создать пост{% endblock title %}
 {% block content %}
-    <form method='post'>
+    <form method='post' enctype="multipart/form-data">
         {% csrf_token %}
-        <ul>
-            {{ form.as_ul }}
-        </ul>
-        <input type="submit" value="Создать">
+        {% for field in form %}
+            <div class="form_field_wrapper">
+                {{ field.label_tag }}
+                {{ field.errors }}
+                {{ field }}
+                {% if field.help_text %}
+                    <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <input class='submit' type="submit" value="Создать">
     </form>
+    <script src='custom_select/custom_select.js'></script>
 {% endblock content %}

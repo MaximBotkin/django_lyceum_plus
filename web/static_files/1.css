@@ -1,7 +1,102 @@
+@import url('custom_select/custom_select.css');
+
+:root{
+    /* Основной Цвет: */
+    --main-color: #00CC00;
+    --main-dark-color: #269926;
+    --main-darker-color: #008500;
+    --main-light-color: #39E639;
+    --main-lighter-color: #67E667;
+
+    /* Вторичный Цвет A: */
+    --second-color: #009999;
+    --second-dark-color: #1D7373;
+    --second-darker-color: #006363;
+    --second-light-color: #33CCCC;
+    --second-lighter-color: #5CCCCC;
+
+    /* Вторичный Цвет B: */
+    --third-color: #FF7400;
+    --third-dark-color: #BF7130;
+    --third-darker-color: #A64B00;
+    --third-light-color: #FF9640;
+    --third-lighter-color: #FFB273;
+
+    /* Дополнительный Цвет: */
+    --additional-color: #FF0000;
+    --additional-dark-color: #BF3030;
+    --additional-darker-color: #A60000;
+    --additional-light-color: #FF4040;
+    --additional-lighter-color: #FF7373;
+}
+
+html, body {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+}
+
 .header {
-    padding: 60px;
+    padding: 40px;
     text-align: center;
-    background: grey;
+    background: var(--main-darker-color);
     color: white;
-   
-  }
+}
+
+.post {
+    margin: 2vh auto;
+    width: 80vw;
+    background-color: black;
+}
+
+#newpost {
+    margin: 2vh auto;
+    font-size: larger;
+}
+
+main {
+    flex: 1 0 auto;
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    overflow-y: scroll;
+    height: auto;
+}
+
+#page_footer {
+    background-color: var(--main-darker-color);
+    align-self: flex-end;
+    width: 100%;
+    color: white;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    align-self: end;
+    height: auto;
+    flex: 0 0 auto;
+}
+
+.form_field_wrapper{
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    border: 2px solid var(--main-light-color);
+    background-color: var(--main-dark-color);
+    color: white;
+    font-weight: 700;
+    padding: 10px;
+}
+
+.submit {
+    background-color: var(--third-color);
+    color: white;
+    width: 100%;
+    margin: 4px;
+}
