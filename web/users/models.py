@@ -4,6 +4,7 @@ from django.utils import timezone
 from .managers import CustomUserManager
 from sorl.thumbnail import get_thumbnail
 from django.urls import reverse
+from .validators import validate_for_username
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -29,7 +30,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         'Никнэйм',
         max_length=50,
-        unique=True
+        unique=True,
+        validators=[validate_for_username]
     )
     first_name = models.CharField(
         'Имя',
