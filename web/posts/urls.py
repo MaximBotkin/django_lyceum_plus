@@ -7,6 +7,6 @@ app_name = "posts"
 
 urlpatterns = [
     path("", PostsView.as_view(), name="home"),
-    path("newpost", CreatePostView.as_view(), name="newpost"),
-    path("posts/<int:id>", PostDetailView.as_view(), name="postdetail")
+    path("newpost/", CreatePostView.as_view(), name="newpost"),
+    path("<int:id>/", PostDetailView.as_view(), name="postdetail")
 ]

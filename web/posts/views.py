@@ -1,9 +1,10 @@
-from django.views.generic import TemplateView, CreateView, ListView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView
 from django.views.generic.base import ContextMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from posts.models import Post
 from django.urls import reverse
 from .models import PostImage
+
 
 class PostsView(TemplateView, ContextMixin):
     template_name = 'posts/home.html'
@@ -32,13 +33,14 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         return reverse('posts:home')
 
+
 class PostDetailView(DetailView):
     model = Post
     template_name = "posts/post_detail.html"
     pk_url_kwarg = 'id'
+
     def get_context_data(self, **kwargs):
         post = self.get_object()
         context = super().get_context_data(**kwargs)
-        item = self.get_object()
         context['images'] = PostImage.objects.filter(post_id=post.id)
         return context

@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'posts',
     'debug_toolbar',
     'sorl.thumbnail',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +135,5 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
