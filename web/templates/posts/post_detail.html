@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block content %}
+<h1>{{ post.title }}</h1>
+<p>{{ post.text }}</p>
+<p>Категория: {{ post.category }}</p>
+{% if post.tags %}
+<h4>Тэги:</h4>
+{% for tag in post.tags.all %}
+                    <span>{{ tag.name }}</span>
+                {% endfor %}
+{% endif %}
+{% if images %}
+    <h3>Дополнительные фотографии к товару:</h3>
+{% endif %}
+{% for image in images %}
+    <img src="{{ post.get_image_300x300.url }}">
+{% endfor %}
+{% endblock content %}
