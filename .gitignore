@@ -8,3 +8,4 @@ db.sqlite3-journal
 local_settings.py
 venv/
 media/
+sent_mails/

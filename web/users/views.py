@@ -1,5 +1,8 @@
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, FormView
 from .models import CustomUser
+from .forms import RegistrationForm
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 
 class UserListView(ListView):
@@ -15,5 +18,16 @@ class UserDetailView(DetailView):
     template_name = "users/user_detail.html"
 
 
-class SignupView(TemplateView):
-    template_name = 'users/auth/signup.html'
+class SignupView(FormView):
+    form_class = RegistrationForm
+    success_url = '/auth/login/'
+    template_name = "users/auth/signup.html"
+
+    def form_valid(self, form):
+        form.register()
+        return super().form_valid(form)
+
+
+@method_decorator(login_required, name='dispatch')
+class ProfileView(TemplateView):
+    template_name = 'users/profile.html'

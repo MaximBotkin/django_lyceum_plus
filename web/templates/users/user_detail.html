@@ -1,2 +1,17 @@
+<<<<<<< HEAD
 {{ user }}
 <img src="{{ user.get_image_400x300.url }}">
+=======
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Аккаунт {{ user }}:</h1>
+{{ user.first_name }}
+{{ user.last_name }}
+{% if user.avatar %}
+    <img src="{{ user.get_image_400x400.url }}">
+{% else %}
+    <img src="{% static 'user.jpg' %}" width="400" height="400">
+{% endif %}
+{% endblock content %}
+>>>>>>> b2b564bcc8c85a41f599778f82c62d058f98548d
