@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'sorl.thumbnail',
     'ckeditor',
+    'colorfield',
 ]
 
 MIDDLEWARE = [
