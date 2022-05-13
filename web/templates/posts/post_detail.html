@@ -5,8 +5,8 @@
 {% if post.tags %}
 <h4>Тэги:</h4>
 {% for tag in post.tags.all %}
-                    <span>{{ tag.name }}</span>
-                {% endfor %}
+    <span>{{ tag.name }}</span>
+{% endfor %}
 {% endif %}
 {% if images %}
     <h3>Дополнительные фотографии к товару:</h3>
