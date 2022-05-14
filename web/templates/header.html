@@ -17,6 +17,8 @@
     {% if request.user.is_authenticated %}
     <form class="form-inline my-2 my-lg-0">
       <a class="nav-link active" href="{% url 'users:profile' %}">Профиль</a>
+      <a>/</a>
+      <a class="nav-link active" href="{% url 'logout' %}">Выход</a>
     </form>
     {% else %}
     <form class="form-inline my-2 my-lg-0">

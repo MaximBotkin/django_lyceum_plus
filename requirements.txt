@@ -21,3 +21,5 @@ sorl-thumbnail==12.8.0
 sqlparse==0.4.2
 tomli==2.0.1
 typing-extensions==4.2.0
+sorl-thumbnail==12.8.0
+django-colorfield==0.7.0
