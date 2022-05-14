@@ -29,7 +29,8 @@ class PostImage(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=64, default='title', verbose_name='Заголовок')
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='Автор')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория', null=True, related_name='posts')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='Категория',
+                                 null=True, related_name='posts')
     text = RichTextField(verbose_name='Текст', null=False)
     tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)
     upload = models.ImageField('Главное изображение', upload_to='uploads/', null=True)
@@ -56,7 +57,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse("posts:postdetail", kwargs={"id": self.pk})
-    
 
     objects = PostManager()
 

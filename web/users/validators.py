@@ -4,7 +4,6 @@ import string
 
 def validate_for_username(username):
     for letter in username:
-        print(letter)
         if letter not in string.ascii_letters and \
                 letter not in string.digits and letter not in '-_':
             raise ValidationError(

@@ -63,3 +63,11 @@ class RegistrationForm(forms.ModelForm):
         password = cleaned_data.get('password')
         email = cleaned_data.get('email')
         CustomUser.objects.create_user(username=username, email=email, password=password)
+
+
+class Profile(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = (
+            'email', 'username', 'first_name', 'last_name', 'avatar', 'birthday', 'mobile', 'description'
+        )

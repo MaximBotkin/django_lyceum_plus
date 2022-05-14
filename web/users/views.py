@@ -1,8 +1,10 @@
-from django.views.generic import ListView, DetailView, TemplateView, FormView
+from django.views.generic import ListView, DetailView, FormView, TemplateView
+from django.views.generic.base import ContextMixin
 from .models import CustomUser
-from .forms import RegistrationForm
+from .forms import RegistrationForm, Profile
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, render
 
 
 class UserListView(ListView):
@@ -15,13 +17,13 @@ class UserDetailView(DetailView):
     model = CustomUser
     context_object_name = 'user'
     pk_url_kwarg = 'user_id'
-    template_name = "users/user_detail.html"
+    template_name = 'users/user_detail.html'
 
 
 class SignupView(FormView):
     form_class = RegistrationForm
     success_url = '/auth/login/'
-    template_name = "users/auth/signup.html"
+    template_name = 'users/auth/signup.html'
 
     def form_valid(self, form):
         form.register()
@@ -29,5 +31,24 @@ class SignupView(FormView):
 
 
 @method_decorator(login_required, name='dispatch')
-class ProfileView(TemplateView):
+class ProfileView(TemplateView, ContextMixin):
     template_name = 'users/profile.html'
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        user_form = Profile(request.POST or None, instance=user)
+        if user_form.is_valid():
+            user_form.save()
+            return redirect("/users/profile")
+        else:
+            return self.get(request, {'form': user_form})
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, context=self.get_context_data())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        context['user'] = user
+        context['form'] = Profile(self.request.POST or None, instance=user)
+        return context

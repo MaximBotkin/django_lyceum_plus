@@ -1,11 +1,9 @@
-{% extends 'base.html' %}
-{% block content %}
-<h1>Ваш профиль:</h1>
-{% for field in form %}
-    <p>
-        {{ field.errors }}
-        {{ field.label }}
-        {{ field }}
-    </p>
-{% endfor %}
-{% endblock content %}
+{% extends 'users/auth/standard_form.html' %}
+{% block title %}Мой профиль{% endblock title %}
+{% block content_before_form %}
+<p>Мой профиль</p>
+{% endblock content_before_form %}
+{% block fields %}
+    {{ form.as_ul }}
+{% endblock fields %}
+{% block submit %}Сохранить{% endblock submit %}
