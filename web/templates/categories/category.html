@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{ category.name }}
+{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'category.css' %}">
+{% endblock head %}
+{% block content %}
+    <h1 style='background-color: {{ category.color }}'>{{ category.name }}</h1>
+    {% with category.posts.all as posts %}
+        {% include 'posts/posts.html' %}
+    {% endwith %}
+{% endblock content %}

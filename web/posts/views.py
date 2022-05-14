@@ -1,18 +1,8 @@
-from django.views.generic import TemplateView, CreateView, DetailView
-from django.views.generic.base import ContextMixin
+from django.views.generic import CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from posts.models import Post
 from django.urls import reverse
 from .models import PostImage
-
-
-class PostsView(TemplateView, ContextMixin):
-    template_name = 'posts/home.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        context['posts'] = Post.objects.get_collection(self.request.user)
-        return context
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
@@ -31,7 +21,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('posts:home')
+        return reverse('homepage:home')
 
 
 class PostDetailView(DetailView):

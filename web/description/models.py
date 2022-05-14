@@ -1,8 +1,8 @@
-from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
-# from posts.models import Post
+from django.urls import reverse
 from colorfield.fields import ColorField
+import description.managers as managers
 
 
 User = get_user_model()
@@ -56,5 +56,10 @@ class Category(models.Model):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
+    def get_absolute_url(self):
+        return reverse("categories:category", kwargs={"category_id": self.pk})
+
     def __str__(self):
         return self.name[:30]
+
+    objects = managers.CategoryManager()

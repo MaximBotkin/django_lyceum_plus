@@ -1,0 +1,12 @@
+#page_footer {
+    background-color: var(--main-darker-color);
+    align-self: flex-end;
+    width: 100%;
+    color: white;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    align-self: end;
+    height: auto;
+}

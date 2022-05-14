@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Главная{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+{% endblock head %}
+{% block content %}
+    <div class="row">
+        <div class="posts col-9">
+            <a class="btn btn-primary" id='newpost' href='{% url 'posts:newpost' %}'>Создать публикацию</a>
+            {% include 'posts/posts.html' %}
+        </div>
+        <aside class='col-3'>
+            <h4>Категории:</h4>
+            <ul class='list-group'>
+                {% for category in categories %}
+                    <a href="{{ category.get_absolute_url }}">
+                        <li class='list-group-item d-flex justify-content-between' style='background: {{ category.color }}'>
+                            {{ category.name }}
+                        </li>
+                    </a>
+                {% endfor %}
+            </ul>
+        </aside>
+    </div>
+{% endblock content %}
