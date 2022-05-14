@@ -9,7 +9,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("users/", include("users.urls")),
     path("auth/", include(auth_urls)),
-    path("posts/", include("posts.urls", namespace="posts")),
+    path("", include("posts.urls", namespace="posts")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
