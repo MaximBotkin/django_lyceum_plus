@@ -4,7 +4,7 @@ from django.utils import timezone
 from .managers import CustomUserManager
 from sorl.thumbnail import get_thumbnail
 from django.urls import reverse
-from .validators import validate_for_username
+from .validators import validate_for_username, validate_for_mobile
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -53,7 +53,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     mobile = models.PositiveIntegerField(
         'Номер телефона',
         null=True,
-        blank=True
+        blank=True,
+        validators=[validate_for_mobile]
     )
     description = models.TextField(
         'Описание',

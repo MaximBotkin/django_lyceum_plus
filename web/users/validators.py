@@ -1,5 +1,6 @@
 from django.forms import ValidationError
 import string
+import phonenumbers
 
 
 def validate_for_username(username):
@@ -9,3 +10,10 @@ def validate_for_username(username):
             raise ValidationError(
                 'Никнэйм может состоять только из латинских букв и символов - и _'
             )
+
+
+def validate_for_mobile(mobile):
+    try:
+        phonenumbers.parse(f'+{str(mobile)}')
+    except Exception:
+        raise ValidationError('Укажите правильный номер телефона.')
