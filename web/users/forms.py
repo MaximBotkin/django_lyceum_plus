@@ -71,3 +71,6 @@ class Profile(forms.ModelForm):
         fields = (
             'email', 'username', 'first_name', 'last_name', 'avatar', 'birthday', 'mobile', 'description'
         )
+        widgets = {
+            'birthday': forms.DateInput(attrs={'type': 'date'}),
+        }

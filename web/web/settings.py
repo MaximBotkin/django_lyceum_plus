@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'ckeditor',
     'colorfield',
+    'image_uploader_widget',
 ]
 
 MIDDLEWARE = [

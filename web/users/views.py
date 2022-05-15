@@ -51,4 +51,5 @@ class ProfileView(TemplateView, ContextMixin):
         user = self.request.user
         context['user'] = user
         context['form'] = Profile(self.request.POST or None, instance=user)
+        print(context['form'])
         return context
