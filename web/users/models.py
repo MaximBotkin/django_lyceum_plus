@@ -77,7 +77,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return f'{str(self.first_name).capitalize()} {str(self.last_name).capitalize()}'
 
     def get_absolute_url(self):
-        return reverse("users:user_detail", kwargs={"user_id": self.pk})
+        return reverse("users:user_detail", kwargs={"username": self.username})
 
     class Meta:
         verbose_name = 'пользователь'

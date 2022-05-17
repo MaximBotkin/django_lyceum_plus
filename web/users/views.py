@@ -1,10 +1,10 @@
-from django.views.generic import ListView, DetailView, FormView, TemplateView
+from django.views.generic import ListView, FormView, TemplateView
 from django.views.generic.base import ContextMixin
-from .models import CustomUser
+from .models import CustomUser, Subscription
 from .forms import RegistrationForm, Profile
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from posts.models import Post
 
 
@@ -14,11 +14,22 @@ class UserListView(ListView):
     template_name = 'users/user_list.html'
 
 
-class UserDetailView(DetailView):
-    model = CustomUser
-    context_object_name = 'user'
-    pk_url_kwarg = 'user_id'
+class UserDetailView(TemplateView):
     template_name = 'users/user_detail.html'
+
+    def get(self, request, username, *args, **kwargs):
+        user = get_object_or_404(CustomUser, username=username, is_active=True)
+        posts = Post.objects.filter(author=user)
+        followers = Subscription.objects.filter(person=user, is_subscribed=True)
+        following = Subscription.objects.filter(subscriber=user, is_subscribed=True)
+        context = {
+            'user': user, 'posts': posts,
+            'followers': followers, 'following': following
+        }
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        pass
 
 
 class SignupView(FormView):
@@ -38,10 +49,7 @@ class ProfileView(TemplateView, ContextMixin):
     def post(self, request, *args, **kwargs):
         user = request.user
         user_form = Profile(request.POST or None, request.FILES or None, instance=user)
-        print(dir(request))
-        print(request.FILES)
         if user_form.is_valid():
-            print(request.FILES)
             user_form.save()
             return redirect("/users/profile")
         else:

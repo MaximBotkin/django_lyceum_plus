@@ -16,6 +16,10 @@
     </ul>
     {% if request.user.is_authenticated %}
     <form class="form-inline my-2 my-lg-0">
+      {% if user.avatar %}
+      <img style="clip-path: circle();" width="30px" src="{{ user.avatar.url }}">
+      {% endif %}
+      {{ user.username }}
       <a class="nav-link active" href="{% url 'users:profile' %}">Профиль</a>
       <a>/</a>
       <a class="nav-link active" href="{% url 'logout' %}">Выход</a>
