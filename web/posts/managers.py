@@ -6,7 +6,7 @@ class PostManager(models.Manager):
     def get_collection(self, user):
         posts = (
             self.all()
-            .order_by("creation_date")
+            .order_by("-creation_date")
             .select_related("category", "author")
             .prefetch_related("tags")
         )

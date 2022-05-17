@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
 from description.models import Category, Tag
@@ -63,6 +64,8 @@ class Post(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор', null=True)
+    text = RichTextField(verbose_name='Текст', null=False, default='')
+    creation_date = models.DateTimeField('Дата создания', auto_now=True, editable=False)
 
     class Meta:
         verbose_name = 'Комментрий'
