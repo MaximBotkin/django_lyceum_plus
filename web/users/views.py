@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from posts.models import Post
 
+
 class UserListView(ListView):
     queryset = CustomUser.objects.get_all_active_users()
     context_object_name = 'users'

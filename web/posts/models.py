@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from django.contrib.auth import get_user_model
 from description.models import Category, Tag
@@ -68,8 +67,8 @@ class Comment(models.Model):
     creation_date = models.DateTimeField('Дата создания', auto_now=True, editable=False)
 
     class Meta:
-        verbose_name = 'Комментрий'
-        verbose_name_plural = 'Комментрии'
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
 
 
 class PostComment(Comment):
