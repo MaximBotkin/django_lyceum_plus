@@ -1,17 +1,29 @@
-{% extends 'base.html' %} {% block content %}
-<h1>{{ post.title }}</h1>
-<p>{{ post.text }}</p>
-<p>Категория: {{ post.category }}</p>
-{% if post.tags %}
-<h4>Тэги:</h4>
-{% for tag in post.tags.all %}
-    <span>{{ tag.name }}</span>
-{% endfor %}
-{% endif %}
-{% if images %}
-    <h3>Дополнительные фотографии к товару:</h3>
-{% endif %}
-{% for image in images %}
-    <img src="{{ post.get_image_300x300.url }}">
-{% endfor %}
+{% extends 'base.html' %} 
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">{{ post.title }}</h1>
+        <p class="lead">Категория: <span class='badge badge-light' style='background-color: {{ post.category.color }}'>{{ post.category }}</span></p>
+        <hr class="my-4">
+        {% autoescape off %}
+            <p>{{ post.text }}</p>
+        {% endautoescape %}
+        {% if images %}
+            <h3>Дополнительные фотографии к публикации:</h3>
+        {% endif %}
+        {% for image in images %}
+            <p><img src="{{ post.get_image_300x300.url }}"></p>
+        {% endfor %}
+        <p class='lead'>
+            {% for tag in post.tags.all %}
+                <span class='text-muted'>#{{ tag.name }} </span>
+            {% endfor %}
+        </p>
+        <footer class="d-flex flex-column align-items-end">
+            <a href="{{ post.author.get_absolute_url }}" class=''>
+                {{ post.author.get_full_name }}
+            </a>
+            <div class="text-muted">{{ post.creation_date }}</div>
+        </footer>
+    </div>
+    
 {% endblock content %}
