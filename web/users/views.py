@@ -5,7 +5,7 @@ from .forms import RegistrationForm, Profile
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-
+from posts.models import Post
 
 class UserListView(ListView):
     queryset = CustomUser.objects.get_all_active_users()
@@ -36,8 +36,11 @@ class ProfileView(TemplateView, ContextMixin):
 
     def post(self, request, *args, **kwargs):
         user = request.user
-        user_form = Profile(request.POST or None, instance=user)
+        user_form = Profile(request.POST or None, request.FILES or None, instance=user)
+        print(dir(request))
+        print(request.FILES)
         if user_form.is_valid():
+            print(request.FILES)
             user_form.save()
             return redirect("/users/profile")
         else:
@@ -48,8 +51,7 @@ class ProfileView(TemplateView, ContextMixin):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user = self.request.user
-        context['user'] = user
-        context['form'] = Profile(self.request.POST or None, instance=user)
-        print(context['form'])
+        context['user'] = self.request.user
+        context['form'] = Profile(self.request.POST or None, instance=self.request.user)
+        context['posts'] = Post.objects.filter(author=self.request.user)
         return context
