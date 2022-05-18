@@ -1,23 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'auth_forms.css' %}">
+{% endblock head %}
+
 {% block content %}
-{% block content_before_form %}{% endblock content_before_form %}
-    <form method="post">{% csrf_token %}
-        <div>
-        {% if form.errors %}
-            <p class="errornote">
-                {% if form.errors.items|length == 1 %}
-                    Пожалуйста, исправьте ошибку ниже
-                {% else %}
-                    Пожалуйста, исправьте ошибки ниже{% endif %}
-            </p>
-        {% endif %}
-        <fieldset>
-            {% block fields %}{% endblock fields %}
-        </fieldset>
-            <div class="submit-row">
-                <input type="submit" class="btn btn-primary btn-sm" value="{% block submit %}Submit{% endblock submit %}">
+    {% block content_before_form %}{% endblock content_before_form %}
+        <div class="card">
+            <div class="card-header">
+                {% block header %}{% endblock header %}
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-primary">{% block submit %}{% endblock submit %}</button>
+                </form>
             </div>
         </div>
-    </form>
     {% block content_after_form %}{% endblock content_after_form %}
 {% endblock %}

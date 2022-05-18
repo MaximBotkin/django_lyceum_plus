@@ -28,7 +28,10 @@ INSTALLED_APPS = [
     'ckeditor',
     'colorfield',
     'image_uploader_widget',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
