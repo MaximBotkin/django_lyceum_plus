@@ -14,8 +14,8 @@
                 {% endfor %}
             </h6>
             <footer class="blockquote-footer">
-                <a href="{{ post.author.get_absolute_url }}">
-                    @{{ post.author.username }}
+                <a href="{% url 'users:user_detail' post.author %}">
+                    @{{ post.author }}
                 </a>
             </footer>
         </div>
@@ -25,7 +25,7 @@
                     <div class="text-muted">{{ post.creation_date }}</div>
                 </div>
                 <div class="col d-flex justify-content-end">
-                    <a class='btn btn-primary' href="{{ post.get_absolute_url }}">Подробнее</a>
+                    <a class='btn btn-primary' href="{% url 'posts:postdetail' post.pk %}">Подробнее</a>
                 </div>
             </div>
         </div>
