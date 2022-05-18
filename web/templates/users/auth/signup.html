@@ -1,15 +1,21 @@
-{% extends 'users/auth/standard_form.html' %}
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
 {% block title %}Регистрация{% endblock title %}
-{% block content_before_form %}
-<h3>Регистрация</h3>
-{% endblock content_before_form %}
-{% block fields %}
-    {% for field in form %}
-    <p>
-        {{ field.errors }}
-        {{ field.label }}
-        {{ field }}
-    </p>
-    {% endfor %}
-{% endblock fields %}
-{% block submit %}Зарегистрироваться{% endblock submit %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'signup.css' %}">
+{% endblock head %}
+{% block content %}
+    <div class="card">
+        <div class="card-header">
+            Регистрация
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+{% endblock content %}
