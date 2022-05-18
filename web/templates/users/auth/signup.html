@@ -1,4 +1,13 @@
 {% extends 'users/auth/standard_form.html' %}
+{% load static %}
 {% block title %}Регистрация{% endblock title %}
 {% block header %}Регистрация{% endblock header %}
 {% block submit %}Зарегистрироваться{% endblock submit %}
+{% block scripts %}
+    <script>
+        // Используется в js/signup.js
+        const validate_username_url = '{% url 'users:validate_username' %}'
+        const validate_email_url = '{% url 'users:validate_email' %}'
+    </script>
+    <script src="{% static 'js/signup.js' %}"></script>
+{% endblock scripts %}
