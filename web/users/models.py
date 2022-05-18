@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from .managers import CustomUserManager
-from sorl.thumbnail import get_thumbnail
 from django.urls import reverse
 from .validators import validate_for_username, validate_for_mobile
 
@@ -62,16 +61,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         blank=True
     )
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 
-    def get_image_400x400(self):
-        return get_thumbnail(self.avatar, '400x400', crop='center', quality=60)
-
-    def get_image_100x100(self):
-        return get_thumbnail(self.avatar, '100x100', crop='center', quality=60)
+    def __str__(self):
+        return self.username
 
     def get_full_name(self):
         return f'{str(self.first_name).capitalize()} {str(self.last_name).capitalize()}'
@@ -106,6 +102,5 @@ class Subscription(models.Model):
         return f'{self.subscriber} подписался на {self.person}'
 
     class Meta:
-        unique_together = ['person', 'subscriber']
         verbose_name = 'Подписка'
         verbose_name_plural = 'Подписки'

@@ -26,7 +26,16 @@
                      <div class="profile-header-info">
                         <h4 class="m-t-10 m-b-5">{{ user.username}}</h4>
                         <p class="m-b-10">{{ user.description }}</p>
-                        <a class="btn btn btn-info mb-2">Подписаться</a>
+                        <form action="{% url 'users:user_detail' user.username %}"method="post">
+                           {% csrf_token %}
+                           {% if request.user == user %}
+                              <a class="btn btn btn-info mb-2" href={% url 'users:profile' %}>Изменить профиль</a>
+                           {% elif if_person_follows %}
+                              <input class="btn btn btn-info mb-2" type='submit' name='follow' value='Отписаться'>
+                           {% else %}
+                              <input class="btn btn btn-info mb-2" type='submit' name='follow' value='Подписаться'>
+                           {% endif %}
+                        </form>
                         <span class="number"><span class="follow">Подписчики:</span> {{ followers|length }}</span>
                         <span class="number"><span class="follow">Подписки:</span> {{ following|length }}</span>
                      </div>
