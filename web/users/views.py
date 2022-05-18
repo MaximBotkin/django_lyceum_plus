@@ -27,25 +27,29 @@ class UserDetailView(TemplateView):
         posts = Post.objects.filter(author=user)
         followers = Subscription.objects.filter(person=user, is_subscribed=True)
         following = Subscription.objects.filter(subscriber=user, is_subscribed=True)
-        if_person_follows = Subscription.objects.filter(person=user, subscriber=request.user, is_subscribed=True)
+        if_person_follows = Subscription.objects.filter(
+            person=user, subscriber=request.user, is_subscribed=True
+        )
         context = {
-            'user': user, 'posts': posts,
-            'followers': followers, 'following': following,
-            'if_person_follows': if_person_follows,
+            "user": user,
+            "posts": posts,
+            "followers": followers,
+            "following": following,
+            "if_person_follows": if_person_follows,
         }
         return render(request, self.template_name, context)
 
     def post(self, request, username, *args, **kwargs):
         user = get_object_or_404(CustomUser, username=username, is_active=True)
-        follow = request.POST['follow']
-        if follow == 'Подписаться':
+        follow = request.POST["follow"]
+        if follow == "Подписаться":
             sub = Subscription(person=user, subscriber=request.user)
             sub.save()
         else:
             sub = Subscription.objects.get(person=user, subscriber=request.user)
             if sub:
                 sub.delete()
-        return redirect('users:user_detail', username)
+        return redirect("users:user_detail", username)
 
 
 class SignupView(FormView):
@@ -88,6 +92,7 @@ def validate_username(req):
         "is_username_taken": User.objects.filter(username__iexact=username).exists(),
     }
     return JsonResponse(response)
+
 
 def validate_email(req):
     email = req.GET.get("email", None)
