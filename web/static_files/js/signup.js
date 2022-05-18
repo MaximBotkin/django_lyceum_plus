@@ -3,12 +3,13 @@ const email = '#id_email'
 
 function add_error(selector, error_id, text){
     $(selector).removeClass('is-valid').addClass('is-invalid');
+    $(`#${error_id}`).remove();
     $(selector).after(`<div class="invalid-feedback d-block" id="${error_id}">${text}</div>`);
 }
 
-function remove_error(selector, error_id){
+function remove_error(selector, error_selector){
     $(selector).removeClass('is-invalid').addClass('is-valid');
-    $(`#${error_id}`).remove();
+    $(error_selector).remove();
 }
 
 $(document).ready(function () {
@@ -22,7 +23,7 @@ $(document).ready(function () {
                 if (response.is_username_taken){
                     add_error(username, 'usernameError', 'Это имя пользователя занято!')
                 } else {
-                    remove_error(username, 'usernameError')
+                    remove_error(username, '#usernameError')
                 }
             }
         });
@@ -37,7 +38,7 @@ $(document).ready(function () {
                 if (response.is_email_taken){
                     add_error(email, 'emailError', 'Этот e-mail занят!')
                 } else {
-                    remove_error(email, 'emailError')
+                    remove_error(email, '#emailError')
                 }
             }
         });
