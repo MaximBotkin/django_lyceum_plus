@@ -20,9 +20,9 @@
                      <!-- BEGIN profile-header-img -->
                      <div class="profile-header-img">
                         {% if user.avatar %}
-                           <img class="rounded-circle mt-5" width="150px" src="{{ user.avatar.url }}">
+                           <img src="{{ user.avatar.url }}" alt="">
                         {% else %}
-                           <img class="rounded-circle mt-5" width="150px" src="{% static 'images/user.jpg' %}">
+                           <img src="{% static 'images/user.jpg' %}" alt="">
                         {% endif %}
                      </div>
                      <!-- END profile-header-img -->
