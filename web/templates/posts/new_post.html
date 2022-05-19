@@ -1,24 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block title %}Создать пост{% endblock title %}
 {% block head %}
     <link rel="stylesheet" href="{% static 'css/newpost.css' %}">
 {% endblock head %}
 {% block content %}
-    <form method='post' enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.media }}
-        {% for field in form %}
-            <div class="form_field_wrapper">
-                {{ field.label_tag }}
-                {{ field.errors }}
-                {{ field }}
-                {% if field.help_text %}
-                    <p class="help">{{ field.help_text|safe }}</p>
-                {% endif %}
-            </div>
-        {% endfor %}
-        <input class='submit' type="submit" value="Создать">
-    </form>
-    <script src='custom_select/custom_select.js'></script>
+    <div class="card">
+        <div class="card-header">
+            <h4>Создать пост</h4>
+        </div>
+        <div class="card-body">
+            <form method='post' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form|crispy }}
+                <input class='btn btn-primary' type="submit" value="Создать">
+            </form>
+        </div>
+    </div>
 {% endblock content %}

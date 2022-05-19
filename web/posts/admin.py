@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Post, PostComment, UserComment, ReplyComment, PostImage
+from .models import Post, PostImage
 
 
 class PostImageAdmin(admin.StackedInline):
@@ -16,11 +16,6 @@ class PostAdmin(admin.ModelAdmin):
 
     class Meta:
         model = Post
-
-
-admin.site.register(PostComment)
-admin.site.register(UserComment)
-admin.site.register(ReplyComment)
 
 
 @admin.register(PostImage)

@@ -59,37 +59,3 @@ class Post(models.Model):
         return reverse("posts:postdetail", kwargs={"id": self.pk})
 
     objects = PostManager()
-
-
-class Comment(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Автор', null=True)
-    text = RichTextField(verbose_name='Текст', null=False, default='')
-    creation_date = models.DateTimeField('Дата создания', auto_now=True, editable=False)
-
-    class Meta:
-        verbose_name = 'Комментарий'
-        verbose_name_plural = 'Комментарии'
-
-
-class PostComment(Comment):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='Публикация', related_name='comments')
-
-    class Meta:
-        verbose_name = 'Комментарий к публикации'
-        verbose_name_plural = 'Комментарии к публикациям'
-
-
-class UserComment(Comment):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь', related_name='comments')
-
-    class Meta:
-        verbose_name = 'Комментарий к пользователю'
-        verbose_name_plural = 'Комментарии к пользователям'
-
-
-class ReplyComment(Comment):
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, verbose_name='Комментарий', related_name='comments')
-
-    class Meta:
-        verbose_name = 'Ответ на комментарий'
-        verbose_name_plural = 'Ответы на комментарии'

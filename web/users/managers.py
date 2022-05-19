@@ -17,7 +17,6 @@ class CustomUserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
-
         if not extra_fields.get('is_staff') or not extra_fields.get('is_superuser'):
             raise ValueError('Cуперпользователь обязан иметь поля is_staff и is_superuser.')
 
