@@ -27,9 +27,12 @@ class UserDetailView(TemplateView):
         posts = Post.objects.filter(author=user)
         followers = Subscription.objects.filter(person=user, is_subscribed=True)
         following = Subscription.objects.filter(subscriber=user, is_subscribed=True)
-        if_person_follows = Subscription.objects.filter(
-            person=user, subscriber=request.user, is_subscribed=True
-        )
+        if request.user.is_authenticated:
+            if_person_follows = Subscription.objects.filter(
+                person=user, subscriber=request.user, is_subscribed=True
+            )
+        else:
+            if_person_follows = False
         context = {
             "user": user,
             "posts": posts,
