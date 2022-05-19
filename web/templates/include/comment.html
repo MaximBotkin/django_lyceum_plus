@@ -1,0 +1,21 @@
+<div class="comment">
+    <div class="card">
+        <div class="card-header">
+            <h5>
+                <a href="{% url 'users:user_detail' comment.user %}">
+                    {{ comment.user.username }}
+                </a>
+            </h5>
+        </div>
+        <div class="card-body">
+            {% autoescape off %}
+                <p class="card-text">{{ comment.comment }}</p>
+            {% endautoescape %}
+        </div>
+        <div class="card-footer">
+            <div class='row justify-content-end'>
+                <div class="text-muted">{{ comment.submit_date }}</div>
+            </div>
+        </div>
+    </div>
+</div>

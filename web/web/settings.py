@@ -19,10 +19,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'django_extensions',
+    'django_comments',
     'users',
     'description',
     'posts',
+    'core',
     'debug_toolbar',
     'sorl.thumbnail',
     'ckeditor',
@@ -30,6 +33,8 @@ INSTALLED_APPS = [
     'image_uploader_widget',
     'crispy_forms',
 ]
+
+SITE_ID = 1
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

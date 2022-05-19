@@ -1,0 +1,17 @@
+#id_honeypot {
+    display: none;
+}
+.comments {
+    display: flex;
+    padding: 20px 20%;
+    flex-direction: column;
+}
+.comments .card {
+    margin-bottom: 20px;
+}
+.unauthenticated_warning{
+    text-align: center;
+}
+.comment-text{
+    width: 100%;
+}

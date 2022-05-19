@@ -1,4 +1,9 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
+{% load comments %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/post_detail.css' %}">
+{% endblock head %}
 {% block content %}
     <div class="jumbotron">
         <h1 class="display-4">{{ post.title }}</h1>
@@ -25,5 +30,19 @@
             <div class="text-muted">{{ post.creation_date }}</div>
         </footer>
     </div>
-    
+    <div class='comments'>
+        {% if user.is_authenticated %}
+            {% get_comment_form for object as form %}
+            {% comment_form_target as comment_form_target_value %}
+            {% with next=post.get_absolute_url %}
+                {% include 'include/comment_form.html' %}
+            {% endwith %}
+        {% else %}
+            <p class='unauthenticated_warning'>Пожалуйста, <a href="{% url 'login' %}">авторизуйтесь</a>, чтобы оставить комментарий.</p>
+        {% endif %}
+        {% get_comment_list for post as comment_list %}
+        {% for comment in comment_list %}
+            {% include 'include/comment.html' %}
+        {% endfor %}
+    </div>
 {% endblock content %}

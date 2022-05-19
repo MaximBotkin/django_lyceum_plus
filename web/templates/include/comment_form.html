@@ -1,0 +1,21 @@
+{% load custom_tags %}
+<div class="card">
+    <header class="card-header">
+        <h4>Добавить комментарий</h4>
+    </header>
+    <form action="{{ comment_form_target_value }}" method="POST">
+        {% csrf_token %}
+        {{ form.honeypot }}
+        {{ form.content_type }}
+        {{ form.object_pk }}
+        {{ form.timestamp }}
+        {{ form.security_hash }}
+        <div class="card-body">
+            {{ form.comment|add_classes:'comment-text' }}
+        </div>
+        <footer class="card-footer">
+            <input class='btn btn-success' type="submit" value="Оставить комментарий" id="id_submit" />
+        </footer>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+</div>
