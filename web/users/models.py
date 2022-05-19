@@ -61,8 +61,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         blank=True
     )
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
 
     objects = CustomUserManager()
 
