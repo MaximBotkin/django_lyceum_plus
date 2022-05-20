@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'core',
     'debug_toolbar',
     'sorl.thumbnail',
+    'captcha',
     'ckeditor',
     'colorfield',
     'image_uploader_widget',
@@ -148,3 +149,8 @@ SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+RECAPTCHA_PRIVATE_KEY = os.getenv('RECAPTCHA_PRIVATE_KEY')
+RECAPTCHA_PUBLIC_KEY = os.getenv('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_DEFAULT_ACTION = 'generic'
+RECAPTCHA_SCORE_THRESHOLD = 0.5

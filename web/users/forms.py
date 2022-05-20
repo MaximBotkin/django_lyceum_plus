@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
 from django import forms
+from captcha.fields import CaptchaField
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -22,6 +23,7 @@ class RegistrationForm(forms.ModelForm):
     confirm_password = forms.CharField(
         widget=forms.PasswordInput(), label='Подвердите пароль'
     )
+    captcha = CaptchaField(label='Пройдите проверку, что вы не робот.')
 
     class Meta:
         model = CustomUser
