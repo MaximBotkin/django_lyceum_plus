@@ -38,7 +38,7 @@
                         {% endif %}
                         {% for field in form %}
                             {{ field.errors }}
-                            <div class="col-md-12">
+                            <div class="col-md-12 p-2">
                                 {% if field.name == "description" %}
                                     <label class="labels">{{ field.label }}</label>
                                     <textarea name="description" cols="40" rows="5" id="id_description" class="form-control">{{ field.value }}</textarea>
