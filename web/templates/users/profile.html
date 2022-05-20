@@ -43,15 +43,11 @@
                                     <label class="labels">{{ field.label }}</label>
                                     <textarea name="description" cols="40" rows="5" id="id_description" class="form-control">{{ field.value }}</textarea>
                                 {% elif field.name == 'avatar' %}
-                                    <label class="labels">Изменить:</label><br>
+                                    <label class="labels">Изменить фотографию:</label><br>
                                     <input type="file" name="avatar" accept="image/*" id="id_avatar">
                                 {% elif field.name == "birthday" %}
-                                    {% if field.value %}
-                                        <label class="labels">{{ field.label }}: {{ field.value }}</label><br>
-                                    {% else %}
-                                        <label class="labels">Дата рождения не указана.</label><br>
-                                    {% endif %}
-                                    <input type="date" name="birthday" value="{{ field.value }}" id="id_birthday">
+                                    <label class="labels">{{ field.label }}</label>
+                                    <input type="date" name="birthday" class="form-control" value="{{ field.value|date:'Y-m-d' }}" id="id_birthday">
                                 {% else %}
                                     <label class="labels">{{ field.label }}</label>
                                     <input type="{{ field.type }}" class="form-control" name="{{ field.name }}" value="{{ field.value }}" maxlength="{{ field.maxlength }}" id="{{ field.id }}">
