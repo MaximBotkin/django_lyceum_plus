@@ -23,45 +23,46 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Настройки профиля</h4>
                 </div>
-                <form method="post">
-                {% csrf_token %}
-                <div class="row mt-3">
-                    {% if form.errors %}
-                        <p>
-                        {% if form.errors.items|length == 1 %}
-                            Пожалуйста, исправьте ошибку ниже.
-                        {% else %}
-                            Пожалуйста, исправьте ошибки ниже.
-                        {% endif %}
-                        </p>
-                    {% endif %}
-                    {% for field in form %}
-                        {{ field.errors }}
-                        <div class="col-md-12">
-                            {% if field.name == "description" %}
-                                <label class="labels">{{ field.label }}</label>
-                                <textarea name="description" cols="40" rows="5" id="id_description" class="form-control">{{ field.value }}</textarea>
-                            {% elif field.name == 'avatar' %}
-                                <label class="labels">Изменить:</label><br>
-                                <input type="file" name="avatar" accept="image/*" id="id_avatar">
-                            {% elif field.name == "birthday" %}
-                                {% if field.value %}
-                                    <label class="labels">{{ field.label }}: {{ field.value }}</label><br>
-                                {% else %}
-                                    <label class="labels">Дата рождения не указана.</label><br>
-                                {% endif %}
-                                <input type="date" name="birthday" value="{{ field.value }}" id="id_birthday">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.media }}
+                    <div class="row mt-3">
+                        {% if form.errors %}
+                            <p>
+                            {% if form.errors.items|length == 1 %}
+                                Пожалуйста, исправьте ошибку ниже.
                             {% else %}
-                                <label class="labels">{{ field.label }}</label>
-                                <input type="{{ field.type }}" class="form-control" name="{{ field.name }}" value="{{ field.value }}" maxlength="{{ field.maxlength }}" id="{{ field.id }}">
+                                Пожалуйста, исправьте ошибки ниже.
                             {% endif %}
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="mt-4 text-center">
-                    <input type="submit" class="btn btn-primary" value="Сохранить">
-                </div>
-            </form>
+                            </p>
+                        {% endif %}
+                        {% for field in form %}
+                            {{ field.errors }}
+                            <div class="col-md-12">
+                                {% if field.name == "description" %}
+                                    <label class="labels">{{ field.label }}</label>
+                                    <textarea name="description" cols="40" rows="5" id="id_description" class="form-control">{{ field.value }}</textarea>
+                                {% elif field.name == 'avatar' %}
+                                    <label class="labels">Изменить:</label><br>
+                                    <input type="file" name="avatar" accept="image/*" id="id_avatar">
+                                {% elif field.name == "birthday" %}
+                                    {% if field.value %}
+                                        <label class="labels">{{ field.label }}: {{ field.value }}</label><br>
+                                    {% else %}
+                                        <label class="labels">Дата рождения не указана.</label><br>
+                                    {% endif %}
+                                    <input type="date" name="birthday" value="{{ field.value }}" id="id_birthday">
+                                {% else %}
+                                    <label class="labels">{{ field.label }}</label>
+                                    <input type="{{ field.type }}" class="form-control" name="{{ field.name }}" value="{{ field.value }}" maxlength="{{ field.maxlength }}" id="{{ field.id }}">
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="mt-4 text-center">
+                        <input type="submit" class="btn btn-primary" value="Сохранить">
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-md-4">
