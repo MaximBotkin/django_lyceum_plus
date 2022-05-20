@@ -29,7 +29,7 @@
                      <!-- BEGIN profile-header-info -->
                      <div class="profile-header-info">
                         <h4 class="m-t-10 m-b-5">{{ user.username}}</h4>
-                        <p class="m-b-10">{{ user.description }}</p>
+                        <p class="m-b-10" style="word-wrap: break-word;">{{ user.description }}</p>
                         <form action="{% url 'users:user_detail' user.username %}"method="post">
                            {% csrf_token %}
                            {% if request.user.is_authenticated %}

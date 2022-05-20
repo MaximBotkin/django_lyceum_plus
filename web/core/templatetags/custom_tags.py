@@ -1,4 +1,5 @@
 from django import template
+import math
 
 
 register = template.Library()
@@ -35,3 +36,12 @@ def add_classes(value, arg):
             css_classes.append(a)
     # join back to single string
     return value.as_widget(attrs={"class": " ".join(css_classes)})
+
+
+@register.filter(name='divide')
+def divide(value, arg):
+    """Divide list on sublists with length = arg"""
+    result = []
+    for i in range(0, math.ceil(len(value) / 4)):
+        result.append(value[arg * i:arg * (i + 1)])
+    return result

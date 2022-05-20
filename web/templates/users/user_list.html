@@ -1,22 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_tags %}
 {% block content %}
-{% for user in users %}
-
-<p>Пользователь: {{ user.username }}</p>
-{% if user.avatar %}
-    <img src="{{ user.get_image_100x100.url }}">
-{% else %}
-    <img src="{% static 'images/user.jpg' %}" width="100" height="100">
-{% endif %}
-
-
-
-
-<ul> 
-    <li>Почта: {{ user.email }}</li>
-    <li>Описание: {{ user.description|truncatewords:9 }}</li>
-</ul>
-    
-{% endfor %}
+    {% for group_of_users in users|divide:4 %}
+        <div class="card-deck row p-4">
+            {% for user in group_of_users %}
+                <div class="card-deck col-lg-3 col-md-4 col-12">
+                    <div class="card">
+                        <a href="{{ user.get_absolute_url }}">
+                            {% if user.avatar %}
+                                <img class="card-img-top" src="{{ user.avatar.url }}">
+                            {% else %}
+                                <img class="card-img-top" src="{% static 'images/user.jpg' %}">
+                            {% endif %}
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ user.username }}</h5>
+                            <p class="card-text">{{ user.description|truncatechars:150 }}</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Зарегистрирован(а) {{ user.date_joined }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
 {% endblock content %}
