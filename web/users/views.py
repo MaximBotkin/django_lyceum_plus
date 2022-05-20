@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.views.generic import ListView, FormView, TemplateView
+from django.views.generic import FormView, TemplateView
 from django.views.generic.base import ContextMixin
 from .models import CustomUser, Subscription
 from .forms import RegistrationForm, Profile
@@ -13,10 +13,24 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class UserListView(ListView):
-    queryset = CustomUser.objects.get_all_active_users()
-    context_object_name = "users"
+class UserListView(TemplateView):
     template_name = "users/user_list.html"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, context=self.get_context_data())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        users = []
+        for user in CustomUser.objects.get_all_active_users():
+            followers = len(Subscription.objects.filter(person=user, is_subscribed=True))
+            following = len(Subscription.objects.filter(subscriber=user, is_subscribed=True))
+            posts = len(Post.objects.filter(author=user))
+            user_to_add = {'avatar': user.avatar, 'username': user.username, 'description': user.description,
+                           'followers': followers, 'following': following, 'posts': posts}
+            users.append(user_to_add)
+        context['users'] = users
+        return context
 
 
 class UserDetailView(TemplateView):
