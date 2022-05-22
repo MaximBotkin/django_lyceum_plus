@@ -28,6 +28,9 @@ class LikeDislike(models.Model):
         verbose_name = "Оценка"
         verbose_name_plural = "Оценки"
 
+    def __str__(self) -> str:
+        return "Дизлайк" if self.vote == -1 else "Лайк"
+
     objects = managers.LikeDislikeManager()
 
 
