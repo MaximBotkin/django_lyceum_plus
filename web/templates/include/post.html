@@ -13,6 +13,7 @@
                     #{{ tag }}
                 {% endfor %}
             </h6>
+            {% include 'include/estimation.html' %}
             <footer class="blockquote-footer">
                 <a href="{% url 'users:user_detail' post.author %}">
                     @{{ post.author }}

@@ -16,7 +16,7 @@ class PostAdmin(admin.ModelAdmin):
 
     class Meta:
         model = Post
-    
+
     def view_on_site(self, obj):
         return obj.get_absolute_url()
 

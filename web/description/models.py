@@ -3,37 +3,32 @@ from django.contrib.auth import get_user_model
 from django.urls import reverse
 from colorfield.fields import ColorField
 import description.managers as managers
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 User = get_user_model()
 
 
-class AbstractRating(models.Model):
-    RELATED_NAME = "rating"
-    CHOICES = (
-        (1, "Лайк"),
-        (0, "Нейтрально"),
-        (-1, "Дизлайк"),
+class LikeDislike(models.Model):
+    LIKE = 1
+    DISLIKE = -1
+
+    VOTES = ((DISLIKE, "Не нравится"), (LIKE, "Нравится"))
+
+    vote = models.SmallIntegerField(verbose_name=("Голос"), choices=VOTES)
+    user = models.ForeignKey(
+        User, verbose_name=("Пользователь"), on_delete=models.CASCADE
     )
-    star = models.IntegerField("Оценка", choices=CHOICES, default=CHOICES[1][0])
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name=RELATED_NAME)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey()
 
     class Meta:
-        verbose_name = "Рейтинг"
-        verbose_name_plural = "Рейтинги"
+        verbose_name = "Оценка"
+        verbose_name_plural = "Оценки"
 
-
-class PostRating(AbstractRating):
-    post = models.ForeignKey(
-        'posts.Post', on_delete=models.CASCADE, related_name=AbstractRating.RELATED_NAME
-    )
-
-    class Meta:
-        verbose_name = "Рейтинг публикации"
-        verbose_name_plural = "Рейтинги публикаций"
-
-    def __str__(self):
-        return str(self.star)
+    objects = managers.LikeDislikeManager()
 
 
 class Tag(models.Model):
@@ -50,7 +45,7 @@ class Tag(models.Model):
 
 class Category(models.Model):
     name = models.CharField("Название", max_length=50, unique=True)
-    color = ColorField(default='#FFFFFF', format='hex')
+    color = ColorField(default="#FFFFFF", format="hex")
 
     class Meta:
         verbose_name = "Категория"

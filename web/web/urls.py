@@ -14,6 +14,7 @@ urlpatterns = [
     path("category/", include("description.categories_urls", namespace="category")),
     path('comments/', include('django_comments.urls')),
     path('captcha/', include('captcha.urls')),
+    path('', include('description.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

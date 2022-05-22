@@ -24,3 +24,11 @@
         </aside>
     </div>
 {% endblock content %}
+{% block 'scripts' %}
+    <script>
+        const like_url = '{% url "estimation:post_like" %}';
+        const dislike_url = '{% url "estimation:post_dislike" %}';
+        const check_estimated_url = '{% url "estimation:check_estimated" %}';
+    </script>
+    <script src="{% static 'js/estimation.js' %}"></script>
+{% endblock 'scripts' %}
