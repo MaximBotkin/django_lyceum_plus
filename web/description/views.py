@@ -43,6 +43,8 @@ class VotesView(View):
         except LikeDislike.DoesNotExist:
             obj.votes.create(user=request.user, vote=self.vote_type)
             result = True
+        if not request.user.is_authenticated:
+            result = False
         return HttpResponse(
             json.dumps(
                 {

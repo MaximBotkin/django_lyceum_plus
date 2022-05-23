@@ -19,9 +19,13 @@ function like() {
         data: { 'pk': pk },
 
         success: function (json) {
-            makeIconActive(like)
             makeIconDisabled(dislike)
-
+            console.log(json.result)
+            if (json.result){
+                makeIconActive(like)
+            } else {
+                makeIconDisabled(like)
+            }
             like.parent().find("[data-count='like']").text(json.like_count);
             dislike.parent().find("[data-count='dislike']").text(json.dislike_count);
         }
@@ -44,8 +48,12 @@ function dislike() {
 
         success: function (json) {
             makeIconDisabled(like)
-            makeIconActive(dislike)
-
+            console.log(json.result)
+            if (json.result){
+                makeIconActive(dislike)
+            } else {
+                makeIconDisabled(dislike)
+            }
             like.parent().find("[data-count='like']").text(json.like_count);
             dislike.parent().find("[data-count='dislike']").text(json.dislike_count);
         }
@@ -67,7 +75,6 @@ function checkEstimated(){
 
         success: function (json) {
             result = json.result
-            console.log(result)
             for (const key in result) {
                 const val = result[key]
                 if (val === -1){
