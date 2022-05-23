@@ -11,7 +11,6 @@ class PostImageAdmin(admin.StackedInline):
 class PostAdmin(admin.ModelAdmin):
     list_display = ("author", "title", "image_tmb")
     list_display_links = ("title",)
-    filter_horizontal = ("tags",)
     inlines = [PostImageAdmin]
 
     class Meta:

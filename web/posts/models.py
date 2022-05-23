@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-from description.models import Category, Tag
+from description.models import Category
 from posts.managers import PostManager
 from sorl.thumbnail import get_thumbnail
 from django.utils.safestring import mark_safe
@@ -8,6 +8,7 @@ from ckeditor.fields import RichTextField
 from django.urls import reverse
 from description.models import LikeDislike
 from django.contrib.contenttypes.fields import GenericRelation
+from taggit.managers import TaggableManager
 
 
 User = get_user_model()
@@ -43,10 +44,10 @@ class Post(models.Model):
         related_name="posts",
     )
     text = RichTextField(verbose_name="Текст", null=False)
-    tags = models.ManyToManyField(Tag, verbose_name="Тэги", blank=True)
     upload = models.ImageField("Главное изображение", upload_to="uploads/", null=True)
     creation_date = models.DateTimeField("Дата создания", auto_now=True, editable=False)
     votes = GenericRelation(LikeDislike, related_query_name="posts")
+    tags = TaggableManager()
 
     def get_image_300x300(self):
         if self.upload:

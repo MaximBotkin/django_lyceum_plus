@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'colorfield',
     'image_uploader_widget',
     'crispy_forms',
+    'taggit',
 ]
 
 SITE_ID = 1

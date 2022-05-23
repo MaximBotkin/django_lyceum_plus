@@ -34,18 +34,6 @@ class LikeDislike(models.Model):
     objects = managers.LikeDislikeManager()
 
 
-class Tag(models.Model):
-    name = models.CharField("Название", max_length=50, unique=True)
-    slug = models.SlugField("Slug", unique=True, max_length=300)
-
-    class Meta:
-        verbose_name = "Тэг"
-        verbose_name_plural = "Тэги"
-
-    def __str__(self):
-        return self.name[:30]
-
-
 class Category(models.Model):
     name = models.CharField("Название", max_length=50, unique=True)
     color = ColorField(default="#FFFFFF", format="hex")
