@@ -50,7 +50,11 @@
                                     <input type="date" name="birthday" class="form-control" value="{{ field.value|date:'Y-m-d' }}" id="id_birthday">
                                 {% else %}
                                     <label class="labels">{{ field.label }}</label>
-                                    <input type="{{ field.type }}" class="form-control" name="{{ field.name }}" value="{{ field.value }}" maxlength="{{ field.maxlength }}" id="{{ field.id }}">
+                                    <input type="{{ field.type }}" class="form-control" name="{{ field.name }}" 
+                                    {% if field.value != None %}
+                                        value="{{ field.value }}"
+                                    {% endif %}
+                                    maxlength="{{ field.maxlength }}" id="{{ field.id }}">
                                 {% endif %}
                             </div>
                         {% endfor %}
