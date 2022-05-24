@@ -8,7 +8,13 @@
 {% endblock head %}
 {% block content %}
     <h1 style='background-color: {{ category.color }}'>{{ category.name }}</h1>
-    {% with category.posts.all as posts %}
-        {% include 'posts/posts.html' %}
-    {% endwith %}
+    {% include 'posts/posts.html' %}
 {% endblock content %}
+{% block 'scripts' %}
+    <script>
+        const like_url = '{% url "estimation:post_like" %}';
+        const dislike_url = '{% url "estimation:post_dislike" %}';
+        const check_estimated_url = '{% url "estimation:check_estimated" %}';
+    </script>
+    <script src="{% static 'js/estimation.js' %}"></script>
+{% endblock 'scripts' %}

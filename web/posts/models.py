@@ -9,6 +9,7 @@ from django.urls import reverse
 from description.models import LikeDislike
 from django.contrib.contenttypes.fields import GenericRelation
 from taggit.managers import TaggableManager
+from description.models import TaggedWhatever
 
 
 User = get_user_model()
@@ -47,7 +48,7 @@ class Post(models.Model):
     upload = models.ImageField("Главное изображение", upload_to="uploads/", null=True)
     creation_date = models.DateTimeField("Дата создания", auto_now=True, editable=False)
     votes = GenericRelation(LikeDislike, related_query_name="posts")
-    tags = TaggableManager()
+    tags = TaggableManager(through=TaggedWhatever)
 
     def get_image_300x300(self):
         if self.upload:

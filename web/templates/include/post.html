@@ -10,8 +10,9 @@
             {% endautoescape %}
             <h6 class="card-subtitle mb-2 text-muted">
                 {% for tag in post.tags.all %}
-                    #{{ tag }}
+                    <a href="{{ tag.get_absolute_filter_url }}">#{{ tag }}</a>
                 {% endfor %}
+                {{post.tag}}
             </h6>
             {% include 'include/estimation.html' %}
             <footer class="blockquote-footer">
