@@ -5,10 +5,11 @@ from description.models import Category
 from description.models import LikeDislike
 from django.contrib.contenttypes.models import ContentType
 import json
+from core.views import FilterPostByTagMixin
 from django.http import HttpResponse
 
 
-class CategoryPostsView(TemplateView, ContextMixin):
+class CategoryPostsView(TemplateView, ContextMixin, FilterPostByTagMixin):
     template_name = "categories/category.html"
 
     def get_context_data(self, **kwargs):
@@ -16,6 +17,7 @@ class CategoryPostsView(TemplateView, ContextMixin):
         context["category"] = Category.objects.get_category_with_posts(
             self.kwargs["category_id"]
         )
+        context["posts"] = self.apply_filter(context["category"].posts.all(), self.kwargs)
         return context
 
 

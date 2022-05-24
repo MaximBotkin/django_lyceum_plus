@@ -5,6 +5,8 @@ from colorfield.fields import ColorField
 import description.managers as managers
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from taggit.models import TagBase, GenericTaggedItemBase
+from django.utils.http import urlencode
 
 
 User = get_user_model()
@@ -49,3 +51,29 @@ class Category(models.Model):
         return self.name[:30]
 
     objects = managers.CategoryManager()
+
+
+class Tag(TagBase):
+    class Meta:
+        verbose_name = "Тэг"
+        verbose_name_plural = "Тэги"
+
+    def get_absolute_filter_url(self):
+        return "%s?%s" % (
+            reverse("homepage:home"),
+            urlencode({"tag_filter": self.slug}),
+        )
+
+
+class TaggedWhatever(GenericTaggedItemBase):
+    # TaggedWhatever can also extend TaggedItemBase or a combination of
+    # both TaggedItemBase and GenericTaggedItemBase. GenericTaggedItemBase
+    # allows using the same tag for different kinds of objects, in this
+    # example Food and Drink.
+
+    # Here is where you provide your custom Tag class.
+    tag = models.ForeignKey(
+        Tag,
+        on_delete=models.CASCADE,
+        related_name="%(app_label)s_%(class)s_items",
+    )
