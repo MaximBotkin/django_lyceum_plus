@@ -19,10 +19,22 @@ class UserListView(TemplateView):
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, context=self.get_context_data())
 
-    def get_context_data(self, **kwargs):
+    def post(self, request, *args, **kwargs):
+        result = []
+        if request.POST['input']:
+            result = CustomUser.objects.filter(username__startswith=request.POST['input'])
+            if not result:
+                result = ['empty']
+        return render(request, self.template_name, context=self.get_context_data(result))
+
+    def get_context_data(self, users_to_find=[],  **kwargs):
         context = super().get_context_data(**kwargs)
         users = []
-        for user in CustomUser.objects.get_all_active_users():
+        if not users_to_find:
+            users_to_find = CustomUser.objects.get_all_active_users()
+        elif users_to_find == ['empty']:
+            users_to_find = []
+        for user in users_to_find:
             followers = len(Subscription.objects.filter(person=user, is_subscribed=True))
             following = len(Subscription.objects.filter(subscriber=user, is_subscribed=True))
             posts = len(Post.objects.filter(author=user))

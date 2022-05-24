@@ -5,6 +5,15 @@
     <link rel="stylesheet" href="{% static 'css/user_list.css' %}">
 {% endblock head %}
 {% block content %}
+    <form method='post'>
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Здесь вы можете найти пользователя по нику..." aria-describedby="basic-addon2" name='input'>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">🔎</button>
+            </div>
+        </div>
+    </form>
     <div class="row d-flex mt-4 mb-4">
         {% for user in users %}
         <div class="col-12 col-sm-6 col-lg-3">    
@@ -43,6 +52,8 @@
               </div>   
              </div>
             </div>
+        {% empty %}
+            <h3>К сожалению, по вашему запросу мы не смогли ничего найти...</h3>
         {% endfor %}
         </div>
 {% endblock content %}

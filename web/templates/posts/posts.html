@@ -4,4 +4,6 @@
 </head>
 {% for post in posts %}
     {% include 'include/post.html' %}
+{% empty %}
+    <h3>К сожалению, по вашему запросу мы не смогли ничего найти...</h3>
 {% endfor %}
