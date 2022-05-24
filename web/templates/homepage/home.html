@@ -5,6 +5,15 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock head %}
 {% block content %}
+    <form method='post'>
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Здесь вы можете найти пост..." aria-describedby="basic-addon2" name='input'>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="submit">🔎</button>
+            </div>
+        </div>
+    </form>
     <div class="row">
         <div class="posts col-9">
             <a class="btn btn-primary" id='newpost' href='{% url 'posts:newpost' %}'>Создать публикацию</a>
