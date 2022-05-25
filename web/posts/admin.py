@@ -9,7 +9,7 @@ class PostImageAdmin(admin.StackedInline):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ("author", "title", "image_tmb")
+    list_display = ("author", "title")
     list_display_links = ("title",)
     inlines = [PostImageAdmin]
 
