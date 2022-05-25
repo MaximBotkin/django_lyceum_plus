@@ -1,5 +1,5 @@
 from django import forms
-from posts.models import Post, PostImage
+from posts.models import Post
 
 
 class PostForm(forms.ModelForm):
@@ -12,4 +12,8 @@ class PostForm(forms.ModelForm):
             "tags",
         ]
 
-    attachments = forms.ImageField(required=False, label="Изображения", widget=forms.ClearableFileInput(attrs={"multiple": True}))
+    attachments = forms.ImageField(
+        required=False,
+        label="Изображения",
+        widget=forms.ClearableFileInput(attrs={"multiple": True})
+    )
