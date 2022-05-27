@@ -12,4 +12,8 @@ class PostForm(forms.ModelForm):
             "tags",
         ]
 
-    attachments = forms.ImageField(required=False, label="Изображения", widget=forms.ClearableFileInput(attrs={"multiple": True}))
+    attachments = forms.ImageField(
+        required=False,
+        label="Изображения",
+        widget=forms.ClearableFileInput(attrs={"multiple": True}),
+    )

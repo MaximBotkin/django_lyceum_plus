@@ -9,24 +9,36 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('description', '0003_alter_category_color'),
-        ('posts', '0003_auto_20220506_1628'),
+        ("description", "0003_alter_category_color"),
+        ("posts", "0003_auto_20220506_1628"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='author',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
+            model_name="post",
+            name="author",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Автор",
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='description.category', verbose_name='Категория'),
+            model_name="post",
+            name="category",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="description.category",
+                verbose_name="Категория",
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='title',
-            field=models.CharField(default='title', max_length=64, verbose_name='Заголовок'),
+            model_name="post",
+            name="title",
+            field=models.CharField(
+                default="title", max_length=64, verbose_name="Заголовок"
+            ),
         ),
     ]

@@ -11,55 +11,123 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('posts', '0001_initial'),
+        ("posts", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AbstractRating',
+            name="AbstractRating",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('star', models.IntegerField(choices=[(1, 'Лайк'), (0, 'Нейтрально'), (-1, 'Дизлайк')], default=0, verbose_name='Оценка')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='rating', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "star",
+                    models.IntegerField(
+                        choices=[(1, "Лайк"), (0, "Нейтрально"), (-1, "Дизлайк")],
+                        default=0,
+                        verbose_name="Оценка",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="rating",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Рейтинг',
-                'verbose_name_plural': 'Рейтинги',
+                "verbose_name": "Рейтинг",
+                "verbose_name_plural": "Рейтинги",
             },
         ),
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, unique=True, verbose_name='Название')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=50, unique=True, verbose_name="Название"
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Категория',
-                'verbose_name_plural': 'Категории',
+                "verbose_name": "Категория",
+                "verbose_name_plural": "Категории",
             },
         ),
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50, unique=True, verbose_name='Название')),
-                ('slug', models.SlugField(max_length=300, unique=True, verbose_name='Slug')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=50, unique=True, verbose_name="Название"
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(max_length=300, unique=True, verbose_name="Slug"),
+                ),
             ],
             options={
-                'verbose_name': 'Тэг',
-                'verbose_name_plural': 'Тэги',
+                "verbose_name": "Тэг",
+                "verbose_name_plural": "Тэги",
             },
         ),
         migrations.CreateModel(
-            name='PostRating',
+            name="PostRating",
             fields=[
-                ('abstractrating_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='description.abstractrating')),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='rating', to='posts.post')),
+                (
+                    "abstractrating_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="description.abstractrating",
+                    ),
+                ),
+                (
+                    "post",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="rating",
+                        to="posts.post",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Рейтинг публикации',
-                'verbose_name_plural': 'Рейтинги публикаций',
+                "verbose_name": "Рейтинг публикации",
+                "verbose_name_plural": "Рейтинги публикаций",
             },
-            bases=('description.abstractrating',),
+            bases=("description.abstractrating",),
         ),
     ]

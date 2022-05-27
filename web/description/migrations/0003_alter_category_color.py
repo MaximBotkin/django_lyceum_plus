@@ -7,13 +7,22 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('description', '0002_category_color'),
+        ("description", "0002_category_color"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='category',
-            name='color',
-            field=models.CharField(default='#FFF', max_length=9, validators=[description.validators.RegexValidator('#([a-zA-Z0-9]{8}|[a-zA-Z0-9]{6}|[a-zA-Z0-9]{3})')], verbose_name='Цвет'),
+            model_name="category",
+            name="color",
+            field=models.CharField(
+                default="#FFF",
+                max_length=9,
+                validators=[
+                    description.validators.RegexValidator(
+                        "#([a-zA-Z0-9]{8}|[a-zA-Z0-9]{6}|[a-zA-Z0-9]{3})"
+                    )
+                ],
+                verbose_name="Цвет",
+            ),
         ),
     ]

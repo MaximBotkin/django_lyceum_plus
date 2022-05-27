@@ -9,53 +9,112 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('posts', '0005_auto_20220508_1118'),
+        ("posts", "0005_auto_20220508_1118"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='comment',
-            options={'verbose_name': 'Комментрий', 'verbose_name_plural': 'Комментрии'},
+            name="comment",
+            options={"verbose_name": "Комментрий", "verbose_name_plural": "Комментрии"},
         ),
         migrations.AddField(
-            model_name='comment',
-            name='author',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Автор'),
+            model_name="comment",
+            name="author",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+                verbose_name="Автор",
+            ),
         ),
         migrations.CreateModel(
-            name='UserComment',
+            name="UserComment",
             fields=[
-                ('comment_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='posts.comment')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to=settings.AUTH_USER_MODEL, verbose_name='Пользователь')),
+                (
+                    "comment_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="posts.comment",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to=settings.AUTH_USER_MODEL,
+                        verbose_name="Пользователь",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Комментарий к пользователю',
-                'verbose_name_plural': 'Комментарии к пользователям',
+                "verbose_name": "Комментарий к пользователю",
+                "verbose_name_plural": "Комментарии к пользователям",
             },
-            bases=('posts.comment',),
+            bases=("posts.comment",),
         ),
         migrations.CreateModel(
-            name='ReplyComment',
+            name="ReplyComment",
             fields=[
-                ('comment_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='posts.comment')),
-                ('comment', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='posts.comment', verbose_name='Комментарий')),
+                (
+                    "comment_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="posts.comment",
+                    ),
+                ),
+                (
+                    "comment",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to="posts.comment",
+                        verbose_name="Комментарий",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Ответ на комментарий',
-                'verbose_name_plural': 'Ответы на комментарии',
+                "verbose_name": "Ответ на комментарий",
+                "verbose_name_plural": "Ответы на комментарии",
             },
-            bases=('posts.comment',),
+            bases=("posts.comment",),
         ),
         migrations.CreateModel(
-            name='PostComment',
+            name="PostComment",
             fields=[
-                ('comment_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='posts.comment')),
-                ('post', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='posts.post', verbose_name='Публикация')),
+                (
+                    "comment_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="posts.comment",
+                    ),
+                ),
+                (
+                    "post",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to="posts.post",
+                        verbose_name="Публикация",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Комментарий к публикации',
-                'verbose_name_plural': 'Комментарии к публикациям',
+                "verbose_name": "Комментарий к публикации",
+                "verbose_name_plural": "Комментарии к публикациям",
             },
-            bases=('posts.comment',),
+            bases=("posts.comment",),
         ),
     ]

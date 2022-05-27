@@ -7,17 +7,21 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('posts', '0016_alter_post_tags'),
+        ("posts", "0016_alter_post_tags"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='post',
-            name='upload',
+            model_name="post",
+            name="upload",
         ),
         migrations.AlterField(
-            model_name='postimage',
-            name='post',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='images', to='posts.post'),
+            model_name="postimage",
+            name="post",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="images",
+                to="posts.post",
+            ),
         ),
     ]

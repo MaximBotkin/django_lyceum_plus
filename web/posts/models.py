@@ -56,7 +56,12 @@ class PostImage(models.Model):
     def get_image(self, img_width, img_height):
         width, height = get_image_dimensions(self.image.file)
         resize = min(width / img_width, height / img_height)
-        return get_thumbnail(self.image, f"{int(resize * width)}x{int(resize * height)}", crop="center", quality=100)
+        return get_thumbnail(
+            self.image,
+            f"{int(resize * width)}x{int(resize * height)}",
+            crop="center",
+            quality=100,
+        )
 
     def get_image_1200x1200(self):
         return self.get_image(1200, 1200)

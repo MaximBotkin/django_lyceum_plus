@@ -38,10 +38,10 @@ def add_classes(value, arg):
     return value.as_widget(attrs={"class": " ".join(css_classes)})
 
 
-@register.filter(name='divide')
+@register.filter(name="divide")
 def divide(value, arg):
     """Divide list on sublists with length = arg"""
     result = []
     for i in range(0, math.ceil(len(value) / 4)):
-        result.append(value[arg * i:arg * (i + 1)])
+        result.append(value[arg * i : arg * (i + 1)])
     return result

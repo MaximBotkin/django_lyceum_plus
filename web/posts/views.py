@@ -14,7 +14,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         post = form.save()
-        for item in self.request.FILES.getlist('attachments'):
+        for item in self.request.FILES.getlist("attachments"):
             PostImage.objects.create(image=item, post=post)
         return super().form_valid(form)
 

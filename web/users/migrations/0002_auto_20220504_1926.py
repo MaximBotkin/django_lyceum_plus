@@ -8,23 +8,51 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='customuser',
-            options={'verbose_name': 'пользователь', 'verbose_name_plural': 'пользователи'},
+            name="customuser",
+            options={
+                "verbose_name": "пользователь",
+                "verbose_name_plural": "пользователи",
+            },
         ),
         migrations.CreateModel(
-            name='Profile',
+            name="Profile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('username', models.CharField(default='user', max_length=50, verbose_name='Никнэйм')),
-                ('first_name', models.CharField(max_length=50, null=True, verbose_name='Имя')),
-                ('last_name', models.CharField(max_length=50, null=True, verbose_name='Фамилия')),
-                ('description', models.TextField(null=True, verbose_name='Описание')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "username",
+                    models.CharField(
+                        default="user", max_length=50, verbose_name="Никнэйм"
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(max_length=50, null=True, verbose_name="Имя"),
+                ),
+                (
+                    "last_name",
+                    models.CharField(max_length=50, null=True, verbose_name="Фамилия"),
+                ),
+                ("description", models.TextField(null=True, verbose_name="Описание")),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

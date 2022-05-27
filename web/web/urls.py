@@ -12,9 +12,9 @@ urlpatterns = [
     path("posts/", include("posts.urls", namespace="posts")),
     path("", include("homepage.urls", namespace="homepage")),
     path("category/", include("description.categories_urls", namespace="category")),
-    path('comments/', include('django_comments.urls')),
-    path('captcha/', include('captcha.urls')),
-    path('', include('description.urls')),
+    path("comments/", include("django_comments.urls")),
+    path("captcha/", include("captcha.urls")),
+    path("", include("description.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

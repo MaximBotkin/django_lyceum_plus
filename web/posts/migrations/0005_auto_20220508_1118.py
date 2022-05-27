@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('posts', '0004_auto_20220506_1634'),
+        ("posts", "0004_auto_20220506_1634"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='post',
-            options={'verbose_name': 'Публикация', 'verbose_name_plural': 'Публикации'},
+            name="post",
+            options={"verbose_name": "Публикация", "verbose_name_plural": "Публикации"},
         ),
         migrations.AddField(
-            model_name='post',
-            name='creation_date',
-            field=models.DateTimeField(auto_now=True, verbose_name='Дата создания'),
+            model_name="post",
+            name="creation_date",
+            field=models.DateTimeField(auto_now=True, verbose_name="Дата создания"),
         ),
     ]

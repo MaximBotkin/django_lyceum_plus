@@ -7,20 +7,39 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('posts', '0006_auto_20220508_1227'),
+        ("posts", "0006_auto_20220508_1227"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='PostImage',
+            name="PostImage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to='uploads/', verbose_name='Изображение')),
-                ('post', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='posts.post', verbose_name='Товар')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(upload_to="uploads/", verbose_name="Изображение"),
+                ),
+                (
+                    "post",
+                    models.ForeignKey(
+                        default=None,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="posts.post",
+                        verbose_name="Товар",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Фотография, связанная с постом',
-                'verbose_name_plural': 'Фотографии, связанные с постом',
+                "verbose_name": "Фотография, связанная с постом",
+                "verbose_name_plural": "Фотографии, связанные с постом",
             },
         ),
     ]

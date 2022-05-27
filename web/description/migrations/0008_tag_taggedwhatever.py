@@ -7,32 +7,77 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
-        ('description', '0007_delete_tag'),
+        ("contenttypes", "0002_remove_content_type_name"),
+        ("description", "0007_delete_tag"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, unique=True, verbose_name='name')),
-                ('slug', models.SlugField(allow_unicode=True, max_length=100, unique=True, verbose_name='slug')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(max_length=100, unique=True, verbose_name="name"),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        allow_unicode=True,
+                        max_length=100,
+                        unique=True,
+                        verbose_name="slug",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name='TaggedWhatever',
+            name="TaggedWhatever",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('object_id', models.IntegerField(db_index=True, verbose_name='object ID')),
-                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='description_taggedwhatever_tagged_items', to='contenttypes.contenttype', verbose_name='content type')),
-                ('tag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='description_taggedwhatever_items', to='description.tag')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "object_id",
+                    models.IntegerField(db_index=True, verbose_name="object ID"),
+                ),
+                (
+                    "content_type",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="description_taggedwhatever_tagged_items",
+                        to="contenttypes.contenttype",
+                        verbose_name="content type",
+                    ),
+                ),
+                (
+                    "tag",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="description_taggedwhatever_items",
+                        to="description.tag",
+                    ),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

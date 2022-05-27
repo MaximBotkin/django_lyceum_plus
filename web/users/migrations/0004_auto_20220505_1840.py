@@ -6,46 +6,50 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0003_auto_20220505_1256'),
+        ("users", "0003_auto_20220505_1256"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='customuser',
-            name='avatar',
-            field=models.ImageField(null=True, upload_to='uploads/', verbose_name='Аватарка'),
+            model_name="customuser",
+            name="avatar",
+            field=models.ImageField(
+                null=True, upload_to="uploads/", verbose_name="Аватарка"
+            ),
         ),
         migrations.AddField(
-            model_name='customuser',
-            name='description',
-            field=models.TextField(null=True, verbose_name='Описание'),
+            model_name="customuser",
+            name="description",
+            field=models.TextField(null=True, verbose_name="Описание"),
         ),
         migrations.AddField(
-            model_name='customuser',
-            name='first_name',
-            field=models.CharField(max_length=50, null=True, verbose_name='Имя'),
+            model_name="customuser",
+            name="first_name",
+            field=models.CharField(max_length=50, null=True, verbose_name="Имя"),
         ),
         migrations.AddField(
-            model_name='customuser',
-            name='last_name',
-            field=models.CharField(max_length=50, null=True, verbose_name='Фамилия'),
+            model_name="customuser",
+            name="last_name",
+            field=models.CharField(max_length=50, null=True, verbose_name="Фамилия"),
         ),
         migrations.AddField(
-            model_name='customuser',
-            name='mobile',
-            field=models.PositiveIntegerField(null=True, verbose_name='Номер телефона'),
+            model_name="customuser",
+            name="mobile",
+            field=models.PositiveIntegerField(null=True, verbose_name="Номер телефона"),
         ),
         migrations.AddField(
-            model_name='customuser',
-            name='username',
-            field=models.CharField(default='user', max_length=50, verbose_name='Никнэйм'),
+            model_name="customuser",
+            name="username",
+            field=models.CharField(
+                default="user", max_length=50, verbose_name="Никнэйм"
+            ),
         ),
         migrations.AlterField(
-            model_name='customuser',
-            name='email',
-            field=models.EmailField(max_length=254, unique=True, verbose_name='Почта'),
+            model_name="customuser",
+            name="email",
+            field=models.EmailField(max_length=254, unique=True, verbose_name="Почта"),
         ),
         migrations.DeleteModel(
-            name='Profile',
+            name="Profile",
         ),
     ]

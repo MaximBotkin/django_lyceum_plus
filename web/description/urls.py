@@ -24,6 +24,6 @@ urlpatterns = [
     path(
         "posts/check_estimated/",
         views.CheckEstimatedView.as_view(model=Post),
-        name="check_estimated"
-    )
+        name="check_estimated",
+    ),
 ]

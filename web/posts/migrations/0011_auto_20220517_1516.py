@@ -7,18 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('posts', '0010_alter_post_category'),
+        ("posts", "0010_alter_post_category"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='comment',
-            name='creation_date',
-            field=models.DateTimeField(auto_now=True, verbose_name='Дата создания'),
+            model_name="comment",
+            name="creation_date",
+            field=models.DateTimeField(auto_now=True, verbose_name="Дата создания"),
         ),
         migrations.AddField(
-            model_name='comment',
-            name='text',
-            field=ckeditor.fields.RichTextField(default='', verbose_name='Текст'),
+            model_name="comment",
+            name="text",
+            field=ckeditor.fields.RichTextField(default="", verbose_name="Текст"),
         ),
     ]

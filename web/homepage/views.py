@@ -20,9 +20,11 @@ class HomepageView(TemplateView, ContextMixin, FilterPostByTagMixin):
 
     def post(self, request, *args, **kwargs):
         context = {}
-        context['categories'] = Category.objects.all()
+        context["categories"] = Category.objects.all()
         result = []
-        if request.POST['input']:
-            result = Post.objects.filter(title__contains=request.POST['input']).order_by('-creation_date')
-        context['posts'] = result
+        if request.POST["input"]:
+            result = Post.objects.filter(
+                title__contains=request.POST["input"]
+            ).order_by("-creation_date")
+        context["posts"] = result
         return render(request, self.template_name, context)

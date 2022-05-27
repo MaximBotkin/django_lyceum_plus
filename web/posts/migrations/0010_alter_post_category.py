@@ -7,14 +7,20 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('description', '0004_alter_category_color'),
-        ('posts', '0009_alter_post_text'),
+        ("description", "0004_alter_category_color"),
+        ("posts", "0009_alter_post_text"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='category',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='posts', to='description.category', verbose_name='Категория'),
+            model_name="post",
+            name="category",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="posts",
+                to="description.category",
+                verbose_name="Категория",
+            ),
         ),
     ]

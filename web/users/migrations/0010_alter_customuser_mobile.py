@@ -7,13 +7,18 @@ import users.validators
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0009_alter_customuser_username'),
+        ("users", "0009_alter_customuser_username"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='customuser',
-            name='mobile',
-            field=models.PositiveIntegerField(blank=True, null=True, validators=[users.validators.validate_for_mobile], verbose_name='Номер телефона'),
+            model_name="customuser",
+            name="mobile",
+            field=models.PositiveIntegerField(
+                blank=True,
+                null=True,
+                validators=[users.validators.validate_for_mobile],
+                verbose_name="Номер телефона",
+            ),
         ),
     ]

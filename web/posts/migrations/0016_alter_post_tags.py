@@ -7,14 +7,19 @@ import taggit.managers
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('description', '0008_tag_taggedwhatever'),
-        ('posts', '0015_post_tags'),
+        ("description", "0008_tag_taggedwhatever"),
+        ("posts", "0015_post_tags"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='tags',
-            field=taggit.managers.TaggableManager(help_text='A comma-separated list of tags.', through='description.TaggedWhatever', to='description.Tag', verbose_name='Tags'),
+            model_name="post",
+            name="tags",
+            field=taggit.managers.TaggableManager(
+                help_text="A comma-separated list of tags.",
+                through="description.TaggedWhatever",
+                to="description.Tag",
+                verbose_name="Tags",
+            ),
         ),
     ]

@@ -6,20 +6,20 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('posts', '0012_alter_comment_options'),
+        ("posts", "0012_alter_comment_options"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='Comment',
+            name="Comment",
         ),
         migrations.DeleteModel(
-            name='PostComment',
+            name="PostComment",
         ),
         migrations.DeleteModel(
-            name='ReplyComment',
+            name="ReplyComment",
         ),
         migrations.DeleteModel(
-            name='UserComment',
+            name="UserComment",
         ),
     ]
