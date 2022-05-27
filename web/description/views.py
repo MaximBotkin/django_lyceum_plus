@@ -1,12 +1,12 @@
-from django.views.generic import TemplateView
-from django.views import View
-from django.views.generic.base import ContextMixin
-from description.models import Category
-from description.models import LikeDislike
-from django.contrib.contenttypes.models import ContentType
 import json
+
 from core.views import FilterPostByTagMixin
+from description.models import Category, LikeDislike
+from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponse
+from django.views import View
+from django.views.generic import TemplateView
+from django.views.generic.base import ContextMixin
 
 
 class CategoryPostsView(TemplateView, ContextMixin, FilterPostByTagMixin):

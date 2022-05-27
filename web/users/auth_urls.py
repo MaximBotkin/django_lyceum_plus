@@ -1,15 +1,12 @@
+from django.contrib.auth.views import (LoginView, LogoutView,
+                                       PasswordChangeDoneView,
+                                       PasswordChangeView,
+                                       PasswordResetCompleteView,
+                                       PasswordResetConfirmView,
+                                       PasswordResetDoneView,
+                                       PasswordResetView)
 from django.urls import path
 from users import views
-from django.contrib.auth.views import (
-    LoginView,
-    LogoutView,
-    PasswordChangeView,
-    PasswordChangeDoneView,
-    PasswordResetView,
-    PasswordResetDoneView,
-    PasswordResetConfirmView,
-    PasswordResetCompleteView,
-)
 
 urlpatterns = [
     path("admin/login/", LoginView.as_view(template_name="users/auth/login.html")),

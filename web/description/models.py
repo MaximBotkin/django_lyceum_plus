@@ -1,13 +1,12 @@
-from django.db import models
-from django.contrib.auth import get_user_model
-from django.urls import reverse
-from colorfield.fields import ColorField
 import description.managers as managers
-from django.contrib.contenttypes.models import ContentType
+from colorfield.fields import ColorField
+from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.fields import GenericForeignKey
-from taggit.models import TagBase, GenericTaggedItemBase
+from django.contrib.contenttypes.models import ContentType
+from django.db import models
+from django.urls import reverse
 from django.utils.http import urlencode
-
+from taggit.models import GenericTaggedItemBase, TagBase
 
 User = get_user_model()
 
@@ -15,8 +14,10 @@ User = get_user_model()
 class LikeDislike(models.Model):
     LIKE = 1
     DISLIKE = -1
-
-    VOTES = ((DISLIKE, "Не нравится"), (LIKE, "Нравится"))
+    VOTES = [
+        (DISLIKE, "Не нравится"),
+        (LIKE, "Нравится")
+    pre]
 
     vote = models.SmallIntegerField(verbose_name=("Голос"), choices=VOTES)
     user = models.ForeignKey(
@@ -26,6 +27,8 @@ class LikeDislike(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey()
 
+    objects = managers.LikeDislikeManager()
+
     class Meta:
         verbose_name = "Оценка"
         verbose_name_plural = "Оценки"
@@ -33,24 +36,22 @@ class LikeDislike(models.Model):
     def __str__(self) -> str:
         return "Дизлайк" if self.vote == -1 else "Лайк"
 
-    objects = managers.LikeDislikeManager()
-
 
 class Category(models.Model):
     name = models.CharField("Название", max_length=50, unique=True)
     color = ColorField(default="#FFFFFF", format="hex")
 
+    objects = managers.CategoryManager()
+
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
-    def get_absolute_url(self):
-        return reverse("categories:category", kwargs={"category_id": self.pk})
-
     def __str__(self):
         return self.name[:30]
 
-    objects = managers.CategoryManager()
+    def get_absolute_url(self):
+        return reverse("categories:category", kwargs={"category_id": self.pk})
 
 
 class Tag(TagBase):

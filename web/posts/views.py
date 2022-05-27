@@ -1,9 +1,10 @@
-from django.views.generic import CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from posts.models import Post
 from django.urls import reverse
-from .models import PostImage
+from django.views.generic import CreateView, DetailView
 from posts.forms import PostForm
+from posts.models import Post
+
+from .models import PostImage
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):

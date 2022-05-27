@@ -1,9 +1,9 @@
+from core.views import FilterPostByTagMixin
+from description.models import Category
+from django.shortcuts import render
 from django.views.generic import TemplateView
 from django.views.generic.base import ContextMixin
 from posts.models import Post
-from description.models import Category
-from django.shortcuts import render
-from core.views import FilterPostByTagMixin
 
 
 class HomepageView(TemplateView, ContextMixin, FilterPostByTagMixin):

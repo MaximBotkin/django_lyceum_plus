@@ -1,9 +1,10 @@
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
-from django.utils import timezone
-from .managers import CustomUserManager
 from django.urls import reverse
-from .validators import validate_for_username, validate_for_mobile
+from django.utils import timezone
+
+from .managers import CustomUserManager
+from .validators import validate_for_mobile, validate_for_username
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -28,18 +29,18 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
+    class Meta:
+        verbose_name = "пользователь"
+        verbose_name_plural = "пользователи"
+
     def __str__(self):
         return self.username
-
-    def get_full_name(self):
-        return f"{str(self.first_name).capitalize()} {str(self.last_name).capitalize()}"
 
     def get_absolute_url(self):
         return reverse("users:user_detail", kwargs={"username": self.username})
 
-    class Meta:
-        verbose_name = "пользователь"
-        verbose_name_plural = "пользователи"
+    def get_full_name(self):
+        return f"{str(self.first_name).capitalize()} {str(self.last_name).capitalize()}"
 
 
 class Subscription(models.Model):
@@ -60,9 +61,9 @@ class Subscription(models.Model):
         default=True,
     )
 
-    def __str__(self):
-        return f"{self.subscriber} подписался на {self.person}"
-
     class Meta:
         verbose_name = "Подписка"
         verbose_name_plural = "Подписки"
+
+    def __str__(self):
+        return f"{self.subscriber} подписался на {self.person}"

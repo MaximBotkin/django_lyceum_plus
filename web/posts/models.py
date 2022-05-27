@@ -1,17 +1,14 @@
-from django.db import models
+from ckeditor.fields import RichTextField
+from description.models import Category, LikeDislike, TaggedWhatever
 from django.contrib.auth import get_user_model
-from description.models import Category
+from django.contrib.contenttypes.fields import GenericRelation
+from django.core.files.images import get_image_dimensions
+from django.db import models
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 from posts.managers import PostManager
 from sorl.thumbnail import get_thumbnail
-from django.utils.safestring import mark_safe
-from ckeditor.fields import RichTextField
-from django.urls import reverse
-from description.models import LikeDislike
-from django.contrib.contenttypes.fields import GenericRelation
 from taggit.managers import TaggableManager
-from description.models import TaggedWhatever
-from django.core.files.images import get_image_dimensions
-
 
 User = get_user_model()
 
@@ -33,17 +30,17 @@ class Post(models.Model):
     votes = GenericRelation(LikeDislike, related_query_name="posts")
     tags = TaggableManager(through=TaggedWhatever)
 
-    def __str__(self):
-        return self.title[:30]
+    objects = PostManager()
 
     class Meta:
         verbose_name = "Публикация"
         verbose_name_plural = "Публикации"
 
+    def __str__(self):
+        return self.title[:30]
+
     def get_absolute_url(self):
         return reverse("posts:postdetail", kwargs={"id": self.pk})
-
-    objects = PostManager()
 
 
 class PostImage(models.Model):
@@ -52,6 +49,13 @@ class PostImage(models.Model):
         verbose_name="Изображение",
         upload_to="uploads/",
     )
+
+    class Meta:
+        verbose_name = "Фотография, связанная с постом"
+        verbose_name_plural = "Фотографии, связанные с постом"
+
+    def __str__(self):
+        return self.post.title
 
     def get_image(self, img_width, img_height):
         width, height = get_image_dimensions(self.image.file)
@@ -73,10 +77,3 @@ class PostImage(models.Model):
 
     image_tmb.short_description = "Превью"
     image_tmb.allow_tags = True
-
-    class Meta:
-        verbose_name = "Фотография, связанная с постом"
-        verbose_name_plural = "Фотографии, связанные с постом"
-
-    def __str__(self):
-        return self.post.title

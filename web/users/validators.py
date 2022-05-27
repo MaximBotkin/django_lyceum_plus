@@ -1,6 +1,7 @@
-from django.forms import ValidationError
 import string
+
 import phonenumbers
+from django.forms import ValidationError
 
 
 def validate_for_username(username):

@@ -1,6 +1,5 @@
-from django.urls import path
 from description.views import CategoryPostsView
-
+from django.urls import path
 
 app_name = "categories"
 

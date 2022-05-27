@@ -1,6 +1,7 @@
+from re import match
+
 from django.forms import ValidationError
 from django.utils.deconstruct import deconstructible
-from re import match
 
 
 @deconstructible

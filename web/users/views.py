@@ -1,14 +1,14 @@
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.decorators import method_decorator
 from django.views.generic import FormView, TemplateView
 from django.views.generic.base import ContextMixin
-from .models import CustomUser, Subscription
-from .forms import RegistrationForm, Profile
-from django.utils.decorators import method_decorator
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
 from posts.models import Post
-from django.contrib.auth import get_user_model
 
+from .forms import Profile, RegistrationForm
+from .models import CustomUser, Subscription
 
 User = get_user_model()
 
@@ -21,7 +21,7 @@ class UserListView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         result = []
-        if request.POST["input"]:
+        if "input" in request.POST and request.POST["input"]:
             result = CustomUser.objects.filter(
                 username__startswith=request.POST["input"]
             )
@@ -129,16 +129,16 @@ class ProfileView(TemplateView, ContextMixin):
         return context
 
 
-def validate_username(req):
-    username = req.GET.get("username", None)
+def validate_username(request):
+    username = request.GET.get("username", None)
     response = {
         "is_username_taken": User.objects.filter(username__iexact=username).exists(),
     }
     return JsonResponse(response)
 
 
-def validate_email(req):
-    email = req.GET.get("email", None)
+def validate_email(request):
+    email = request.GET.get("email", None)
     response = {
         "is_email_taken": User.objects.filter(email__iexact=email).exists(),
     }

@@ -1,9 +1,9 @@
-from django.urls import path
 from django.contrib.auth.decorators import login_required
-from . import views
-from .models import LikeDislike
+from django.urls import path
 from posts.models import Post
 
+from . import views
+from .models import LikeDislike
 
 app_name = "estimation"
 
