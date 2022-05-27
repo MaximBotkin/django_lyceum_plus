@@ -56,7 +56,7 @@ ROOT_URLCONF = "web.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -79,7 +79,7 @@ INTERNAL_IPS = ["127.0.0.1"]
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "NAME": [os.path.join(BASE_DIR, "db.sqlite3")],
     }
 }
 
@@ -122,11 +122,9 @@ USE_TZ = True
 
 STATIC_ROOT = "static"
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static_files"),
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_files")]
 
-MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_ROOT = [os.path.join(BASE_DIR, "media")]
 MEDIA_URL = "/media/"
 
 # Default primary key field type
@@ -141,7 +139,7 @@ LOGIN_REDIRECT_URL = "/users/profile/"
 LOGOUT_REDIRECT_URL = "/"
 
 EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = BASE_DIR / "sent_mails"
+EMAIL_FILE_PATH = [os.path.join(BASE_DIR, "sent_mails")]
 EMAIL_HOST = "smtp.yandex.ru"
 EMAIL_PORT = 465
 EMAIL_HOST_USER = "botkin.maksimm@yandex.ru"
