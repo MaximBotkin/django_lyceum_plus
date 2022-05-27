@@ -23,6 +23,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         verbose_name="Категория",
         null=True,
+        blank=True,
         related_name="posts",
     )
     text = RichTextField(verbose_name="Текст", null=False)

@@ -4,7 +4,7 @@
             <h4>{{ post.title }}</h4>
         </div>
         <div class="card-body">
-            <h5 class="card-title">{{ post.category }}</h5>
+            <h5 class="card-title">{{ post.category|default:"" }}</h5>
             {% autoescape off %}
                 <p class="card-text">{{ post.text|truncatechars:140 }}</p>
             {% endautoescape %}

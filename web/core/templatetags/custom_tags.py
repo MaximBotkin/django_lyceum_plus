@@ -43,5 +43,5 @@ def divide(value, arg):
     """Divide list on sublists with length = arg"""
     result = []
     for i in range(0, math.ceil(len(value) / 4)):
-        result.append(value[arg * i : arg * (i + 1)])
+        result.append(value[arg * i: arg * (i + 1)])
     return result

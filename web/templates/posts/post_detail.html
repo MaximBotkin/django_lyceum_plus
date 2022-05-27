@@ -8,7 +8,9 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-4">{{ post.title }}</h1>
-            <p class="lead">Категория: <span class='badge badge-light' style='background-color: {{ post.category.color }}'>{{ post.category }}</span></p>
+            {% if post.category %}
+                <p class="lead">Категория: <span class='badge badge-light' style='background-color: {{ post.category.color }}'>{{ post.category }}</span></p>
+            {% endif %}
             <hr class="my-4">
             {% autoescape off %}
                 <p>{{ post.text }}</p>
