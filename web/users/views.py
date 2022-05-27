@@ -84,8 +84,7 @@ class UserDetailView(TemplateView):
 
     def post(self, request, username, *args, **kwargs):
         user = get_object_or_404(CustomUser, username=username, is_active=True)
-        follow = request.POST["follow"]
-        if follow == "Подписаться":
+        if "follow" in request.POST and request.POST["follow"] == "Подписаться":
             sub = Subscription(person=user, subscriber=request.user)
             sub.save()
         else:

@@ -62,18 +62,18 @@ class VotesView(View):
 class CheckEstimatedView(View):
     model = None
 
-    def get(self, req):
-        pks = map(int, req.GET.getlist("pks[]"))
+    def get(self, request):
+        pks = map(int, request.GET.getlist("pks[]"))
         result = dict()
         for pk in pks:
             obj = self.model.objects.get(pk=pk)
             result[pk] = 0
-            if req.user.is_authenticated:
+            if request.user.is_authenticated:
                 try:
                     result[pk] = LikeDislike.objects.get(
                         content_type=ContentType.objects.get_for_model(obj),
                         object_id=obj.id,
-                        user=req.user,
+                        user=request.user,
                     ).vote
                 except LikeDislike.DoesNotExist:
                     result[pk] = 0
