@@ -17,7 +17,7 @@ class LikeDislike(models.Model):
     VOTES = [
         (DISLIKE, "Не нравится"),
         (LIKE, "Нравится")
-    pre]
+    ]
 
     vote = models.SmallIntegerField(verbose_name=("Голос"), choices=VOTES)
     user = models.ForeignKey(
