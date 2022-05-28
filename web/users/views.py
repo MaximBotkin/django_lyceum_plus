@@ -53,8 +53,8 @@ class UserDetailView(TemplateView):
     def get(self, request, username, *args, **kwargs):
         user = get_object_or_404(CustomUser, username=username, is_active=True)
         posts = Post.objects.filter(author=user)
-        followers = Subscription.objects.filter(person=user, is_subscribed=True)
-        following = Subscription.objects.filter(subscriber=user, is_subscribed=True)
+        followers = Subscription.objects.filter(person=user, is_subscribed=True).count()
+        following = Subscription.objects.filter(subscriber=user, is_subscribed=True).count()
         if request.user.is_authenticated:
             if_person_follows = Subscription.objects.filter(
                 person=user, subscriber=request.user, is_subscribed=True
