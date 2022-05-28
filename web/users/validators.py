@@ -7,12 +7,9 @@ from django.forms import ValidationError
 def validate_for_username(username):
     if username == "profile":
         raise ValidationError("Нельзя создать аккаунт с таким никнэймом.")
+    nedded_symbols = f'{string.ascii_letters}{string.digits}-_'
     for letter in username:
-        if (
-            letter not in string.ascii_letters
-            and letter not in string.digits
-            and letter not in "-_"
-        ):
+        if letter not in nedded_symbols:
             raise ValidationError(
                 "Никнэйм может состоять только из латинских букв и символов - и _"
             )
