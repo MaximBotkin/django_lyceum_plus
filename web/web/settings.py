@@ -2,6 +2,13 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+import mimetypes
+
+mimetypes.add_type("application/javascript", ".js", True)
+
+DEBUG_TOOLBAR_CONFIG = {
+    "INTERCEPT_REDIRECTS": False,
+}
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -71,7 +78,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "web.wsgi.application"
 
-INTERNAL_IPS = ["127.0.0.1"]
+INTERNAL_IPS = ["*"]
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -120,9 +127,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = "static"
+
 STATIC_URL = "/static/"
+
+
+
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static_files")]
+   
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
